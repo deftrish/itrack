@@ -1,21 +1,23 @@
 <?php
-	require "sampleheader2.php";
+require "sampleheader2.php";
 ?>
 
 <main>
-<head>
- 
-</head>
-<body>
   <div class="wrapper-main">
     <section class="section-default">
-     
-  </div>
+      <?php
+      if(isset($_SESSION['userId'])) {
+        echo '<p class="login-status">You are logged in!</p>';
 
-  
-</body>
+      }
+    
+      ?>
+  </div>
 </main>
 
+
 <?php
-	require "viewingfooter.php";
-?>
+
+  require "footer.php";
+
+?> 

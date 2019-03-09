@@ -10,8 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <title>iTrack</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
 </head>
 <style>
 
@@ -53,7 +52,7 @@
         </div>
 
         <div class="row">
-            <div class="container">
+            <div class="col-md-12">
                 <table id="myTable">
                 <table class="table table-striped">
                     <thead>
@@ -96,8 +95,13 @@
                 </table>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-md-12">
+                <a href="#" class="btn">Add</a>    
+            </div>
+        </div>
     </div>
+    
     
     <script src="js/jquery-3.3.1.slim.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>

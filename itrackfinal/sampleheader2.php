@@ -31,7 +31,7 @@
     		 <p>
      		 </p>
 			<?php
-				if (isset($_SESSION['userId'])) {
+				if (!isset($_SESSION['userId'])) {
 					echo '<form action="includes/login.inc.php" method="post">
 				<input type="text" name="mailuid" placeholder="Username">
 				<input type="password" name="pwd" placeholder="Password">

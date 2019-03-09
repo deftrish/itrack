@@ -34,7 +34,7 @@ if (isset($_POST['login-submit'])) {
  					$_SESSION['userId'] = $row['idUsers'];
  					$_SESSION['userUid'] = $row['uidUsers'];
  				
- 				header("Location: ../homeitrack.php");
+ 				header("Location: ../homeitrack.php?login=success");
 					exit();
 				}
 				else {
