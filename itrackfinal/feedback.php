@@ -43,42 +43,37 @@
 
         </div>
         <br>
+      
         <div class="row">
-            <div class="container">
-            	<table id="myTable">
+            <div class="col-md-12">
+                <table id="myTable">
                 <table class="table table-striped">
                     <thead>
-                        <th>Reference Number/B.E.N</th>
+                        <th> Blotter Entry Number</th>
                         <th>Comments/Suggestions</th>
                         <th>Date and Time</th>
-                      
+                
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>444444-62587-65</td>
-                            <td>Poor Service</td>
-                            <td>Jan 8, 2018 1:02:33PM</td>
-                        </tr>
-                        <tr>
-                            <td>444444-62587-65</td>
-                            <td>Poor Service</td>
-                            <td>Jan 8, 2018 1:02:33PM</td>
-                        </tr>
-                        <tr>
-                            <td>444444-62587-65</td>
-                            <td>Poor Service</td>
-                            <td>Jan 8, 2018 1:02:33PM</td>
-                        </tr>
-                        <tr>
-                            <td>444444-62587-65</td>
-                            <td>Poor Service</td>
-                            <td>Jan 8, 2018 1:02:33PM</td>
-                        </tr>
-                        <tr>
-                            <td>444444-62587-65</td>
-                            <td>Poor Service</td>
-                            <td>Jan 8, 2018 1:02:33PM</td>
-                        </tr>
+                        <?php
+                        $sql = "SELECT* FROM feedback";
+                        $select_feedback = mysqli_query($conn, $sql);
+                        while($row = mysqli_fetch_assoc($select_feedback))
+                        {
+                            $benNum = $row['benNum'];
+                            $feedbackAns = $row['feedbackAns'];
+                            $dateAns = $row['dateAns'];
+                            #`benNum`, `feedbackAns`, `dateAns`
+
+                            echo"<tr>";
+                            echo "<td> $benNum </td>";
+                            echo "<td> $feedbackAns </td>";
+                            echo "<td> $dateAns </td>";
+                   
+                          
+                            echo "</tr>";
+                        }
+                        ?>
                     </tbody>
                 </table>
                 </table>

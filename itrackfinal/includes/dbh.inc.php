@@ -3,10 +3,10 @@
 $servername = "localhost";
 $dBUsername = "root";
 $dBPassword = "";
-$dBName = "loginsystemtut";
+$dBName = "dbitrack";
 
-$conn = mysqli_connect($servername, $dBUsername, $dBPassword, $dBName);
+$conn = new mysqli($servername, $dBUsername, $dBPassword, $dBName);
 
-if (!$conn){
+if ($conn->connect_errno){
 	die("connection failed: ".mysqli_connect_error());
 }

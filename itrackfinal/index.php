@@ -1,5 +1,5 @@
 <?php
-require "sampleheader2.php";
+require "logintemplate.php";
 ?>
 
 <main>

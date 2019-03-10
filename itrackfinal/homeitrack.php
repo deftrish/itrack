@@ -10,6 +10,8 @@
 <head>
     <meta charset="UTF-8">
     <title>iTrack</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 </head>
 <style>
@@ -25,6 +27,11 @@
     <div class="container">
 
         <div class="row">
+            <div class="col-md-12">
+                <a href="addCase.php" class="btn btn-success">Add</a>    
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-4">
                 <div class="input-group">
                     <input class="form-control py-2 border-right-0 border" type="text" value="search" >
@@ -36,6 +43,7 @@
                 </div>
             </div>
 
+        
             <div class="col-md-4">
                 <div class="form-group">
                     
@@ -63,6 +71,7 @@
                         <th>Investigator on Case</th>
                         <th>Remarks</th>
                         <th> Date Completed </th>
+                        <th>Action</th>
                     </thead>
                     <tbody>
                         <?php
@@ -87,17 +96,13 @@
                             echo "<td> $compInv </td>";
                             echo "<td> $compRemarks </td>";
                             echo "<td> $dateCompl </td>";
+                            echo "<td><a href='editCase.php?id=$benNum'>Edit</a></td>";
                             echo "</tr>";
                         }
                         ?>
                     </tbody>
                 </table>
                 </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <a href="#" class="btn">Add</a>    
             </div>
         </div>
     </div>
