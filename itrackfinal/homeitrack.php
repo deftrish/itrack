@@ -1,4 +1,8 @@
 <?php
+session_start();
+if(!isset($_SESSION['userId'])){
+    header('Location: index.php');
+}
     require "adminheader.php";
 ?>
 <?php
@@ -15,7 +19,6 @@
 
 </head>
 <style>
-
 
 </style>
 

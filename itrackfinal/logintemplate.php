@@ -54,6 +54,7 @@
 				}
 			
 			?>
+			<a href="signupComplainant.php">Signup</a>
 		</div>	
 	</div>
 </div>

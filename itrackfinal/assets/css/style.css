@@ -1,14 +1,4 @@
 
-.container{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  left: 50%;
-  margin-left: -50px;
-}
 .itrackbar{
   background-color: #24ade1;
 }

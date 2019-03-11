@@ -16,6 +16,10 @@
 </style>
 
 <body>
+<br>
+<br>
+
+<a href="addAcct.php" class="btn btn-success">Add</a>
 
 <script src="js/jquery-3.3.1.slim.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>

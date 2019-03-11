@@ -7,11 +7,13 @@ require "logintemplate.php";
     <section class="section-default">
       <?php
       if(isset($_SESSION['userId'])) {
-        echo '<p class="login-status">You are logged in!</p>';
-
+        header("Location: homeitrack.php?");
+        
       }
     
       ?>
+
+
   </div>
 </main>
 

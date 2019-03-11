@@ -22,6 +22,6 @@ input[type=refnum] {
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark itrackbar">
-  <a class="navbar-brand" href="#">iTrack <br> <h6> Community Relationship Management and Feedback System </h6></a>
+  <a class="navbar-brand" href="index.php">iTrack <br> <h6> Community Relationship Management and Feedback System </h6></a>
    
 </nav>
