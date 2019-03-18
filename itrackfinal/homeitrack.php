@@ -26,18 +26,18 @@ if(!isset($_SESSION['userId'])){
     <br>
     <br>
     <br>
-    <br>
+<br>
     <div class="container">
 
         <div class="row">
             <div class="col-md-12">
-                <a href="addCase.php" class="btn btn-success">Add</a>    
+                
             </div>
-        </div>
+    </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="input-group">
-                    <input class="form-control py-2 border-right-0 border" type="text" value="search" >
+                    <input id="search" class="form-control py-2 border-right-0 border" type="text" >
                     <span class="input-group-append">
                         <button class="btn btn-outline-secondary border-left-0 border" type="button">
                             <i class="fa fa-search"></i>
@@ -51,10 +51,10 @@ if(!isset($_SESSION['userId'])){
                 <div class="form-group">
                     
                     <select class="form-control" id="exampleFormControlSelect1">
-                         <option value="0">Status</option>
-                         <option value="1">Under Investigation</option>
-                         <option value="2">Cleared</option>
-                         <option value="3">Solved</option>
+                         <option value="choose" name="status">Status</option>
+                         <option value="underinvestigation" name="status">Under Investigation</option>
+                         <option value="cleared" name="status">Cleared</option>
+                         <option value="solved" name="status">Solved</option>
                     </select>
             
                 </div>
@@ -74,9 +74,8 @@ if(!isset($_SESSION['userId'])){
                         <th>Investigator on Case</th>
                         <th>Remarks</th>
                         <th> Date Completed </th>
-                        <th>Action</th>
                     </thead>
-                    <tbody>
+                    <tbody id="table-body">
                         <?php
                         $sql = "SELECT* FROM adminview";
                         $select_case = mysqli_query($conn, $sql);
@@ -95,11 +94,21 @@ if(!isset($_SESSION['userId'])){
                             echo "<td> $benNum </td>";
                             echo "<td> $compOffense </td>";
                             echo "<td> $dateComi </td>";
-                            echo "<td> $compStatus </td>";
+                        
+                            if($compStatus == 'under_investigation'){
+                                echo "<td class='text-danger'> Under Investigation </td>";        
+                            }else if($compStatus == 'cleared'){
+                                echo "<td class='text-infor'> Cleared </td>";        
+                            }else if($compStatus == 'solved'){
+                                echo "<td class='text-success'> Solved </td>";        
+                            }else{
+                                echo "<td > Status Unknown </td>";        
+                            }
+                            
                             echo "<td> $compInv </td>";
                             echo "<td> $compRemarks </td>";
                             echo "<td> $dateCompl </td>";
-                            echo "<td><a href='editCase.php?id=$benNum'>Edit</a></td>";
+                            echo "<td><a href='editRemarks.php?id=$benNum'>Edit Remarks</a></td>";
                             echo "</tr>";
                         }
                         ?>
@@ -111,15 +120,61 @@ if(!isset($_SESSION['userId'])){
     </div>
     
     
-    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     
+    <script>
+        $(document).ready(function(){
+            var search = $('#search');
+            search.change(function (event){
+                keyword = $(this).val();
+                console.log(keyword);
+                $.ajax({
+                    type: "POST",
+                    url: "ajax/homeitrack.search.php",
+                    dataType: 'json',
+                    data: {
+                        search : keyword
+                    },
+                    success: function(response){
+                        $('#table-body').html('');
+                        $.each(response, function(k, v){
+                            tr = $('<tr></tr>');
+                            tr.append('<td>'+v.benNum+'</td>');
+                            tr.append('<td>'+v.compOffense+'</td>');
+                            tr.append('<td>'+v.dateComi+'</td>');
+                            if(v.compStatus == 'under_investigation'){
+                                tr.append("<td class='text-danger'> Under Investigation </td>");
+                            }else if(v.compStatus == 'cleared'){
+                                tr.append("<td class='text-infor'> Cleared </td>");
+                            }else if(v.compStatus == 'solved'){
+                                tr.append("<td class='text-success'> Solved </td>");    
+                            }else{
+                                tr.append("<td > Status Unknown </td>");                        
+                            }
+                            
+                            tr.append('<td>'+v.compInv+'</td>');
+                            tr.append('<td>'+v.compRemarks+'</td>');
+                            if(v.dateCompl == null){
+                                tr.append('<td></td>');
+                            }else{
+                                tr.append('<td>'+v.dateCompl+'</td>');
+                            }
+                            tr.append('<td><a href="editRemarks.php?id='+ v.benNum+'">Edit Remarks</a></td>');
+                            $('#table-body').append(tr);
+                        });
+                        
+                    },
 
+                })
+            });
+        })
+    </script>
 </body>
 
 </html>
 
 
 <?php
-    require "viewingfooter.php";
+    
 ?>

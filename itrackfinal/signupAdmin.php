@@ -1,4 +1,5 @@
 <?php
+ session_start();
     require "adminheader.php";
 ?>
 
@@ -15,15 +16,15 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-lg-3"></div>
+            <div class="col-lg-3"></div></div>
             <div class="card">
                  <div class="card-body">            
 
             
                 <div id="iu">
 
-            	   <form class="form-group">
-                    <h4 class"loginheader" align="left">Sign up</h4>
+                <form action="includes/signupAdmin.inc.php" method="post">
+                    <h4 class="loginheader" align="left">Add Account</h4>
 
                     
             	
@@ -32,7 +33,7 @@
             			     
             			     <b>First Name</b>
             			     <input type="text" name="fname" class=form-control placeholder="Enter your first name...">
-                            </div>
+                            </div></div>
                             
                             <div class="col-lg-4">
                             <b>Middle Name</b>
@@ -44,10 +45,19 @@
                             <input type="text" name="lname" class=form-control placeholder="Enter your last name...">
                             </div>
 
+                            <div class="col-lg-4">
+                            <b>Username</b>
+                            <input type="text" name="username" class=form-control placeholder="Enter your username..">
+                            </div>
+
+                            <div class="col-lg-4">
+                            <b>email</b>
+                            <input type="text" name="email" class=form-control placeholder="Enter your username..">
+                            </div>
 
                             <div class="col-lg-4">
                             <b>Position</b>
-                            <select name="dropdown" name="position" class=form-control>
+                            <select name="position" class=form-control>
                                 <option value="choose" selected>Choose...</option>
                                 <option value="NUP">NUP</option>
                                 <option value="PO1">PO1</option>
@@ -59,69 +69,18 @@
                             </select>
                             </div>
 
-                            <div class="col-lg-4">
-                            <b>Qualifier</b>
-
-                            <input type="selectbox" name="qualifier" class=form-control>
-                            </div>
-                        </div>
-
                         <div class="row">
                         <div class="col-lg-4">
-                            <b>PRO</b>
-                            <select name="dropdown" name="pro" class=form-control>
-                                <option value="choose" selected>Choose...</option>
-                                <option value="NCRPO">NCRPO</option>
-                                <option value="PRO1">PRO 1</option>
-                                <option value="PRO2">PRO 2</option>
-                                <option value="PRO3">PRO 3</option>
-                                <option value="PRO4-A">PRO4-A</option>
-                                <option value="PRO4-B">PRO4-B</option>
-                                <option value="PRO5">PRO4 5</option>
+                            <b>Role in the system</b>
+                            <select name="role" class=form-control>
+                                <option value="didm"> DIDM Admin </option>
+                                <option value="itms"> ITMS Admin </option>
+                                <option value="investigator"> Duty investigator </option>
+                                <option value="incharge"> Police in-charge </option>
                             </select>
-                        </div>
+                        </div></div>
 
-                        <div class="col-lg-4">
-                            <b>PPO</b>
-                            <select name="dropdown" name="ppo" class=form-control>
-                                <option value="choose" selected>Choose...</option>
-                            </select>
-                        </div>
-                        </div>
-
-                        <div class="row">
-                        <div class="col-lg-4">
-                            <b>PCP</b>
-                            <select name="dropdown" name="pcp" class=form-control>
-                                <option value="choose" selected>Choose...</option>
-                                <option value=""></option>
-                                <option value=""></option>
-                            </select>
-                        </div>
-
-                        
-                        <div class="col-lg-4">
-                            <b>WCPC</b>
-                            <br>
-                        <form action="">
-                                <input type="radio" name="answer" value="yes"> Yes
-                                <input type="radio" name="answer" value="no"> No
-                              
-                        </form>
-                        </div>
-                        </div>
-                        
-                        <div class="row">
-                        <div class="col-lg-4">
-                            <b>Investigator</b>
-                        <form action="">
-                                <input type="radio" name="answer" value="yes"> Yes
-                                <input type="radio" name="answer" value="no"> No
-                              
-                        </form>
-                        </div>
-                        </div>
-
+                   
                         <div class="row">
                         <div class="col-lg-4">
                                  <b>Password</b>
@@ -131,33 +90,27 @@
                             <div class="col-lg-4">
                             <b>Confirm Password</b>
                             <input type="password" name="cpassword" class=form-control placeholder="Re-enter password...">
-                            </div>
-                           
+                            </div> </div>
+
+                           <div class="row">
                             <div class="col-lg-4">
                             <br>
-                           <button  type="submit" id="sendsignup" class="btn btn-primary" formation="/homeitrack.php">
-                            <a href= "complainant_view.php" style="color:white;text-decoration:none"> Submit</a>
+                           <button  type="submit" name="signup-submitAd" id="signup-submit" class="btn btn-primary">
+                            <a style="color:white;text-decoration:none"> Submit</a>
                            </button>
-
-                           <button  type="cancel" id="cancelsignup" class="btn btn-primary" formation="/homeitrack.php">
-                            <a href= "complainant_signup.php" style="color:white;text-decoration:none"> Cancel</a>
-                            </button>       
-                            </div>
                            </div>
 
-                    
-                             
-                        </div>
+                           <button  type="cancel" name="signup-cancelAd" id="signup-cancel" class="btn btn-primary">
+                            <a style="color:white;text-decoration:none"> Cancel</a>
+                            </button>       
+                            </div>
+                            </div>
 
-
-
-        
-                  </form>
-
-            </div>
+                           </form>
+                           </div>
+                           </div>
+                           </div>
 </body>
 </html>
 
-<?php
-	require "viewingfooter.php";
-?>
+

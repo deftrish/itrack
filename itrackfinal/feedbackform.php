@@ -1,30 +1,8 @@
 <?php
-    session_start();
-    require "adminheader.php";
-    include_once 'includes/admin.inc.php';     
-    if(!isset($_SESSION['userId'])){
-        header("Location: index.php");
-    }
-    if(isset($_POST['feedback-submit'])){
-        
-        $userId = $_SESSION['userId'];
-        $benNum = $_GET['benNum'];
-        $feedbackAns = $_POST['feedbackAns'];
-        $dateAns = $_POST['dateAns'];
-        $process = $_POST['process'];
-        $accomodate = $_POST['accomodate'];
-        $service = $_POST['service'];
-
-        $sql = "INSERT INTO feedback (userId, benNum, feedbackAns, dateAns, process, accomodate, service)
-        VALUES ('$userID', '$benNum', '$feedbackAns', '$dateAns' '$process', '$accomodate', '$service')";      
-        if (!$conn->query($sql)){
-            $error = "Something went wrong";
-        }else{
-            header("Location: complainantview.php?");
-        }
-    }
-    
+session_start();
+	require "viewingheader.php";
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,69 +19,69 @@
 
 <body>
     <center>
-        <form method="POST" id="form">
-         <b>1. Ano ang masasabi mo sa pag proseso ng inyong report? 
+    <?php if(!isset($_GET['status'])){?>
+        <form action="includes/feedbackform.inc.php" method="POST">
+         <b>1. Ano ang masasabi mo sa pag proseso ng inyong report?
          <br>
          (What can you say about the processing of the report?)</b>
          <br>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="process" id="radio1" value="napakahusay">
-                <label class="form-check-label" for="napakahusay">
+                <input id="process_napakahusay" class="form-check-input" type="radio" name="process" value="napakahusay" required> 
+                <label class="form-check-label" for="process_napakahusay">
                 Napakahusay
                 </label>
             </div>
 
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="process" id="radio2" value="mahusay">
-                <label class="form-check-label" for="mahusay">
+                <input id="process_mahusay" class="form-check-input" type="radio" name="process" id="radio2" value="mahusay" required>
+                <label class="form-check-label" for="process_mahusay">
                 Mahusay
                 </label>
             </div>
 
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="process" id="option3" value="hindimahusay">
-                <label class="form-check-label" for="hindimahusay">
+                <input id="process_hindimahusay" class="form-check-input" type="radio" name="process" id="option3" value="hindimahusay" required>
+                <label class="form-check-label" for="process_hindimahusay">
                 Hindi Mahusay
                 </label>
             </div>
 
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="process" id="questionthree" value="nangangailangan">
-                <label class="form-check-label" for="nangangailangan">
+                <input id = "process_nangangailangan" class="form-check-input" type="radio" name="process" id="questionthree" value="nangangailangan" required>
+                <label class="form-check-label" for="process_nangangailangan">
                 Nangangailangan ng Pagbabago
                 </label>
             </div>
             <br>
             <br>
-
             <b>2. Kumusta ang pakikitungo sayo ng mga police-in-charge
             <br>
             (How well did the police accomodate you?)</b>
             <br>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="accomodate" id="radio1" value="napakahusay">
-                <label class="form-check-label" for="napakahusay">
+                <input id="accomodate_napakahusay"class="form-check-input" type="radio" name="accomodate" id="radio1" value="napakahusay" required>
+                <label class="form-check-label" for="accomodate_napakahusay">
                 Napakahusay
                 </label>
             </div>
 
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="accomodate" id="radio2" value="mahusay">
-                <label class="form-check-label" for="mahusay">
+                <input id="accomodate_mahusay"class="form-check-input" type="radio" name="accomodate" id="radio2" value="mahusay" required>
+                <label class="form-check-label" for="accomodate_mahusay">
                 Mahusay
                 </label>
             </div>
 
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="accomodate" id="option3" value="hindimahusay">
-                <label class="form-check-label" for="hindimahusay">
+                <input id="accomodate_hindimahusay"class="form-check-input" type="radio" name="accomodate" id="radio3" value="hindimahusay" required>
+                <label class="form-check-label" for="accomodate_hindimahusay">
                 Hindi Mahusay
                 </label>
             </div>
 
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="accomodate" id="questionthree" value="nangangailangan">
-                <label class="form-check-label" for="nangangailangan">
+                <input id="accomodate_nangangailangan"class="form-check-input" type="radio" name="accomodate" id="radio4" value="nangangailangan" required>
+                <label class="form-check-label" for="accomodate_nangangailangan">
                 Nangangailangan ng Pagbabago
                 </label>
             </div>
@@ -115,29 +93,29 @@
             (What can you say about the service of the police-in-charged who accomodated you?)</b>
             <br>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="service" id="radio1" value="napakahusay">
-                <label class="form-check-label" for="napakahusay">
+                <input id="service_napakahusay" class="form-check-input" type="radio" name="service" id="radio1" value="napakahusay" required>
+                <label class="form-check-label" for="service_napakahusay">
                 Napakahusay
                 </label>
             </div>
 
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="service" id="radio2" value="mahusay">
-                <label class="form-check-label" for="mahusay">
+                <input id="service_mahusay" class="form-check-input" type="radio" name="service" id="radio2" value="mahusay" required> 
+                <label class="form-check-label" for="service_mahusay">
                 Mahusay
                 </label>
             </div>
 
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="service" id="option3" value="hindimahusay">
-                <label class="form-check-label" for="hindimahusay">
+                <input id="service_hindimahusay" class="form-check-input" type="radio" name="service" id="option3" value="hindimahusay" required>
+                <label class="form-check-label" for="service_hindimahusay">
                 Hindi Mahusay
                 </label>
             </div>
 
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="service" id="questionthree" value="nangangailangan">
-                <label class="form-check-label" for="nangangailangan">
+                <input id="service_nangangailangan" class="form-check-input" type="radio" name="service" id="questionthree" value="nangangailangan" required>
+                <label class="form-check-label" for="service_nangangailangan">
                 Nangangailangan ng Pagbabago
                 </label>
             </div>
@@ -149,10 +127,14 @@
             <textarea name="comment" rows="5" cols="50"></textarea>
             </div>
 
-            <button type="submit" name="feedback-submit" class="btn btn-primary">Submit</button>
+            <input type="hidden" name="benNum" value="<?php echo $_GET['id']; ?>">
+            <button type="submit" name="submit-feedback" class="btn btn-primary">Submit</button>
         </form>
+    <?php }else{ ?>
+        Yay!!! Thanks
+    <?php } ?>
 
-    </center>
+</center>
 
 <script src="js/jquery-3.3.1.slim.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>

@@ -9,6 +9,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark itrackbar">
   <a class="navbar-brand" href="index.php">iTrack <br> </a>
+  
 <div class="collapse navbar-collapse adminHeaderNav" id="navbarColor01">
     <ul class="adminHeaderNav navbar-nav mr-auto" >
       <li class="nav-item" style="float:left;">
@@ -30,16 +31,17 @@
 </div>
 
   <div class="dropdown" style="float:right;">
-  <button class="dropbtn">Juan Dela Cruz (Admin) &nbsp;&nbsp;<i class="fa fa-caret-down"></i></button>
+  <button class="dropbtn"><?php echo $_SESSION['userUid'] ?> &nbsp;&nbsp;<i class="fa fa-caret-down"></i></button>
 
   <div class="dropdown-content">
-     <a href="">Incident Management Log</a>
+     <a href="incidentMgmt.php">Incident Management Log</a>
   <a href="acctMgmt.php">Account</a>
   <a href="includes/logout.inc.php">Sign out</a>
   </div>
   </div>
 
-
 </nav>
+</body>
+</html>
 
 

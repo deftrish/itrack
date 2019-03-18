@@ -7,7 +7,12 @@ require "logintemplate.php";
     <section class="section-default">
       <?php
       if(isset($_SESSION['userId'])) {
-        header("Location: homeitrack.php?");
+        if($_SESSION['isAdmin']){
+          header("Location: homeitrack.php");
+        }
+        else{
+          header("Location: complainant_view.php");
+        }
         
       }
     

@@ -8,13 +8,12 @@
     if (isset($_POST['case-submit'])) {
         $compOffense = $_POST['compOffense'];
         $dateComi = $_POST['dateComi'];
-        $compStatus = "Under Investigation";
+        $compStatus = "under_investigation";
         $compInv = $_POST['compInv'];
         $compRemarks = $_POST['compRemarks'];
-       // $compCompl = $_POST['compCompl'];
 
         $sql = "INSERT INTO adminview (compOffense, dateComi, compStatus, compInv, compRemarks) 
-        VALUES ('$compOffense', '$dateComi', '$dateInv', '$compStatus' '$compInv', '$compRemarks')";      
+        VALUES ('$compOffense', '$dateComi', '$compStatus', '$compInv', '$compRemarks')";      
         if (!$conn->query($sql)){
             $error = "Something went wrong";
         }else{
@@ -29,6 +28,15 @@
 <html lang="en">
 
 <head>
+<style>
+    .content {
+  max-width: 250px;
+  margin: auto;
+  background: white;
+  padding: 10px;
+}
+
+</style>
     <meta charset="UTF-8">
     <title>iTrack</title>
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -41,22 +49,23 @@
     <br>
     <br>
     <br>
-    <div class="container">
+    <div class="content">
 
     <?php if(isset($error)) : ?>
 		<div class="alert alert-danger" role="alert">
             <?=$error?>
 		</div>
     <?php endif ;?>
-    
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+    <div class="center">
+    <div class="col-md-12">
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" text-align="left" method="post">
         <br>
         <br>
         <br>
-        Offense: <br><input type="text" name="compOffense" placeholder="">
-        Date Committed:<br> <input type="text" name="dateComi" placeholder="">
+        Offense: <br><input type="text" name="compOffense" placeholder=""><br>
+        Date Committed:<br> <input type="text" name="dateComi" placeholder=""><br>
         <!-- <input type="text" name="compStatus" placeholder="Status"> -->
-        Investigator on Case: <br><input type="text" name="compInv" placeholder="">
+        Investigator on Case: <br><input type="text" name="compInv" placeholder=""><br>
         Remarks: <br><input type="text" name="compRemarks" placeholder="">
 		<!-- <input type="password" name="compCompl" placeholder="Date Completed"> -->
         <br>
@@ -65,8 +74,8 @@
 
 	</form>
 				
- 
-    
+    </div>
+    </div>
     <script src="js/jquery-3.3.1.slim.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     

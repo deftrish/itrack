@@ -1,38 +1,126 @@
 <?php
-	require "viewingheader.php";
+session_start();
+    require "adminheader.php";
+    session_start();
+    if(isset($_SESSION['userId'])){
+        header("Location: index.php");
+    }
 ?>
 
-<main>
-	<div class="wrapper-main">
-		<section class="section-default">
-		<?php
-		if(isset($_GET['error'])){
-		 if($_GET['error']=="emptyfields"){	
-			 echo '<p class="signuperror"> Fill in all fields </p>';
-		 }
-		 else if ($_GET['error']=="invaliduidmail"){
-			echo '<p class="signuperror"> Invalid username and email </p>';
-		 }
-		 else if ($_GET['error']=="invaliduid"){
-			echo '<p class="signuperror"> Invalid username</p>';
-		 }
-		}
-		?>
-			<h1>Signup</h1>
-			<form action="includes/signup.inc.php" method="post">
-				<input type="text" name="benNum" placeholder="Ref Num">
-                <input type="text" name="uidUsers" placeholder="Username">
-                <input type="text" name="fnameUser" placeholder="first name">
-                <input type="text" name="mnameUser" placeholder="middle name">
-				<input type="text" name="lnameUser" placeholder="last name">
-                <input type="text" name="emailUsers" placeholder="email address">
-				<input type="password" name="pwdUsers" placeholder="Password">
-				<input type="password" name="cpwdUsers" placeholder="Repeat password">
 
-				<button type="submit" name="signup-submit">Signup</button>
-				
-			</form>
-		</section>
-	</div>
+<!DOCTYPE html>
+<html lang="en">
+<title>Complainant Sign up</title>
+<head>
+  
+    </head>
 
-</main> 
+<body>
+
+<br>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-"></div>
+            <div class="card">
+                 <div class="card-body">            
+
+            
+                <div id="iu">
+
+                    <form action="includes/signupComplainant.inc.php" method="post">
+                    <h4 class="loginheader" align="left">Sign up</h4>
+
+                    
+            	
+            	       <div class="row">
+            		      <div class="col-lg-6">
+            			     
+            			     <b>Reference Number*</b>
+            			     <input type="text" name="rnumber" class=form-control placeholder="Enter your reference number...">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                            <b>First Name</b>
+                            <input type="text" name="fname" class=form-control placeholder="Enter your first name...">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                            <b>Middle Name</b>
+                            <input type="text" name="mname" class=form-control placeholder="Enter your first name...">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                            <b>Last Name</b>
+                            <input type="text" name="lname" class=form-control placeholder="Enter your last name...">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                            <b>Username</b>
+                            <input type="text" name="uidUsers" class=form-control placeholder="Enter your last name...">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                            <b>Email Address</b>
+                            <input type="email" name="emailUsers" class=form-control placeholder="Enter your last name...">
+                            </div>
+                        </div>
+                            
+                        <div class="row">
+                        <div class="col-lg-6">
+                                 <b>Password*</b>
+                             <input type="password" name="password" class=form-control placeholder="Enter a password...">
+                            </div>
+                            
+                            <div class="col-lg-6">
+                            <b>Confirm Password*</b>
+                            <input type="password" name="cpassword" class=form-control placeholder="Re-enter password...">
+                            </div>
+                        </div>
+                           
+                        <div class="row">
+                            <div class="col-lg-6">
+                            <br>
+                           <button  type="submit" name = "signup-submit" id="signup-submit" class="btn btn-primary">
+                            <a href="feedbackform.php" style="color:white;text-decoration:none"> Submit</a>
+                           </button>
+
+
+                           <button  type="cancel" name="signup-cancel" id="signup-cancel" class="btn btn-primary" formation="/homeitrack.php">
+                            <a href= "index.php" style="color:white;text-decoration:none"> Cancel</a>
+                           </button>
+                       </div>
+
+
+                            
+                     
+
+
+                           
+
+                           
+                           </div>
+
+                    
+                             
+                        </div>
+
+
+
+        
+                  </form>
+
+            </div>
+</body>
+</html>
+
+<?php
+	require "viewingfooter.php";
+?>
