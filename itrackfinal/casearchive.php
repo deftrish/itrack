@@ -1,26 +1,22 @@
 <?php
-    session_start();
-    if(!isset($_SESSION['userId'])){
-        header('Location: index.php');
-    }
-    include 'includes/dbh.inc.php';
-    $sql = "SELECT * from incident_mgmt join users on incidentInv = idUsers";
-    $result = $conn->query($sql);
-	require "adminheader.php"; 
-    
+    require "adminheader.php"; 
+        include_once 'includes/dbh.inc.php';
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<title>Incident History</title>
-<link rel="stylesheet" href="assets/css/style.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<title>Case Archive</title>
 
+<link rel="stylesheet" href="assets/css/style.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> 
 <body>
-<br>
+  
+
+
+ <br>
      <br>
-     <h1 class="loginheader" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Incident History</h1>
+     <h1 class="loginheader" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Case Archive</h1>
      <div class="container">
 
         <div class="row">
@@ -34,30 +30,37 @@
                     </span>
                 </div>
             </div>
-<button  type="incidentMgmt" id="incidenMgmt" class="btn btn-primary" formation="/homeitrack.php">
+
+    <button  type="incidentMgmt" id="incidenMgmt" class="btn btn-primary" formation="/homeitrack.php">
     <a href= "incidentMgmt.php" style="color:white;text-decoration:none"> Back to Incident Log</a> <!--Incident History page: to follow -->
                            </button>
         </div>
 <br>
         <!-- suggestion: Sort By date should be added next to the search bar -->
-        <!-- should we add another column for status? (e.g.: pending, resolved, etc.)-->
+
         <div class="row">
             <div class="container">            
                 <table class="table table-striped">
+                <div style="overflow-y:auto;"> 
                 <thead>
                     <th>Incident Ticket Number</th>
                     <th>Incident</th>
+                    <th>Priority</th>
                     <th>Date and Time Created</th>
-                    <th>Filed by</th>
-                    <th>Incident Report</th>
+                    <th>Solution Required</th>
+                    <th>Status</th>
                     <th>Date and Time Resolved</th>
                     <th>Resolved By</th>
                 </thead>
                 <tbody>
+                    <tr>
+                            <td>NO DATA</td>
+                        </tr>
                     <?php
                         if($conn->affected_rows == 0){
                     ?>
-                            
+                       
+                            <!--pls edit-->
                     <?php }else { 
                         while($row = $result->fetch_array()){
                             $report = $row['incidentReport'];
@@ -69,16 +72,14 @@
                             echo '<td>'.$row['date_time'].'</td>';
                             echo "<td>$userName</td>";
                             //hindi pa din po nakikita kung sino yung nagsubmit
-                            echo "<td></td>";
-                            //pareflect yung short description here located at "edit details"
-                            echo "<td></td>";
-                            // insert date and time resolve
+                            echo "<td>$report</td>";
                             echo "<td><a href='itmsview_incidentmgmt.php'>Edit Details</a></td>";
                             echo '</tr>';
                         }
                     } ?>
                 </tbody>
             </table>
-                       
+        </div>
+
 </body>
 </html>

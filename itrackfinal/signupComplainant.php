@@ -1,7 +1,6 @@
 <?php
 session_start();
-    require "adminheader.php";
-    session_start();
+    require "viewingheader.php";
     if(isset($_SESSION['userId'])){
         header("Location: index.php");
     }
@@ -115,6 +114,3 @@ session_start();
 </body>
 </html>
 
-<?php
-	require "viewingfooter.php";
-?>

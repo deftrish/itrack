@@ -81,6 +81,26 @@
                     } ?>
                 </tbody>
             </table>
+            <script>
+            $(document).ready(function(){
+            var search = $('#search');
+            search.change(function (event){
+                keyword = $(this).val();
+                console.log(keyword);
+                    $.ajax({
+                        type: "POST",
+                        url: "ajax/incident_mgmt.search.php",
+                        dataType: 'json',
+                        data: {
+                            search : keyword
+                        },
+                       
+                        
+                    },
 
+                })
+            });
+        })
+        </script>
 </body>
 </html>

@@ -12,7 +12,6 @@ $firstName = $_POST['fname'];
 $middleName = $_POST['mname'];
 $lastName = $_POST['lname'];
 $userName = $_POST['uidUsers'];
-$email = $_POST['emailUsers'];
 $password = $_POST['password'];
 $passwordRepeat = $_POST['cpassword'];
 
@@ -26,7 +25,7 @@ else if ($password !== $passwordRepeat){
 }
 else{
 
-	    $sql = "SELECT referenceNumber FROM complainant_signup  WHERE referenceNumber=?";
+	    $sql = "SELECT benNum FROM adminview WHERE benNum = ?";
 	    $stmt = mysqli_stmt_init($conn);
 	    if (!mysqli_stmt_prepare($stmt, $sql)) {
 	    	header("Location: ../signupComplainant.php?error=sqlerror");
@@ -44,7 +43,7 @@ else{
 	    	}
  
 	    	else {
-	    		$sql = "INSERT INTO users (fnameUser, mnameUser, lnameUser, uidUsers, emailUsers, pwdUsers, isAdmin) VALUES (?, ?, ?, ?, ?, ?, 0)";
+	    		$sql = "INSERT INTO users (fnameUser, mnameUser, lnameUser, uidUsers, pwdUsers, isAdmin) VALUES (?, ?, ?, ?, ?, ?, 0)";
 	    		$stmt = mysqli_stmt_init($conn);
 	    		if (!mysqli_stmt_prepare($stmt, $sql)){
 	    			header("Location: ../signupComplainant.php?error=sqlerror");
@@ -53,7 +52,7 @@ else{
 	    		else {
 	    			$hashedPwd =password_hash($password, PASSWORD_DEFAULT);
 
-	    			mysqli_stmt_bind_param($stmt, "ssssss", $firstName, $middleName, $lastName, $userName, $email, $hashedPwd);
+	    			mysqli_stmt_bind_param($stmt, "ssssss", $firstName, $middleName, $lastName, $userName, $hashedPwd);
 					mysqli_stmt_execute($stmt);
 					$_SESSION['userId'] = mysqli_stmt_insert_id($stmt);
 					$_SESSION['isAdmin'] = false;

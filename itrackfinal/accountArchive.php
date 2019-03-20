@@ -4,7 +4,7 @@
     require "adminheader.php";
     require 'includes/admin.inc.php';
 
-    $sql = "SELECT * FROM users join admins on admins.userID = users.idUsers  where isAdmin = 1 and isDeleted = 0";
+    $sql = "SELECT * FROM users join admins on admins.userID = users.idUsers  where isAdmin = 1 and isDeleted = 1";
     $result = mysqli_query($conn, $sql);
 
 ?>
@@ -45,13 +45,12 @@
 <body>
 <br>
 <br>
-
-<div class="content">
-</div>
-
 <div class="container">
-        <a href="signupAdmin.php" class="btn-xl">+ Add Account</a>
-        <a href="accountArchive.php" style="background: green;color:white" class="btn-xl">Archive</a>
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3">
+            <h2 class="text-center">Account Archive</h2>
+        </div>
+    </div>
     <br>
     <div class="row">
         <div class="col-sm-6 offset-sm-3">
@@ -86,7 +85,6 @@
                             echo "<tr>";
                             echo "<td>$name</td>";
                             echo "<td>$userType</td>";
-                            echo "<td><a href='#'>Edit Account</a>|<a href='includes/deleteAccount.inc.php' class='text-danger'>Delete</a></td>";
                             echo "</tr>";
                         }
 

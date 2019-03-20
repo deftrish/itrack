@@ -27,7 +27,7 @@ input[type=refnum] {
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark itrackbar">
-  			<a class="navbar-brand" href="#">iTrack <br> 
+  			<a class="navbar-brand" href="index.php">iTrack <br> 
   			<h6> Community Relationship Management and Feedback System </h6></a>
    
 </a>
@@ -50,14 +50,7 @@ input[type=refnum] {
       </li>          
     </ul>
 </div>
-<div class="dropdown" style="float:right;">
-  <button class="dropbtn"><?php echo $_SESSION['userUid'] ?> &nbsp;&nbsp;<i class="fa fa-caret-down"></i></button>
 
-  <div class="dropdown-content">
-  <a href="acctMgmt.php">Account</a>
-  <a href="includes/logout.inc.php">Sign out</a>
-  </div>
-  </div>
 
 
 </nav>
