@@ -66,12 +66,6 @@ session_start();
                             <input type="text" name="uidUsers" class=form-control placeholder="Enter your last name...">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                            <b>Email Address</b>
-                            <input type="email" name="emailUsers" class=form-control placeholder="Enter your last name...">
-                            </div>
-                        </div>
                             
                         <div class="row">
                         <div class="col-lg-6">

@@ -74,6 +74,8 @@ if(!isset($_SESSION['userId'])){
                         <th>Investigator on Case</th>
                         <th>Remarks</th>
                         <th> Date Completed </th>
+                        <th> Edited By </th>
+                        <th> Action </th>
                     </thead>
                     <tbody id="table-body">
                         <?php
@@ -108,6 +110,7 @@ if(!isset($_SESSION['userId'])){
                             echo "<td> $compInv </td>";
                             echo "<td> $compRemarks </td>";
                             echo "<td> $dateCompl </td>";
+                            echo "<td>zz</td>";
                             echo "<td><a href='editRemarks.php?id=$benNum'>Edit Remarks</a></td>";
                             echo "</tr>";
                         }
@@ -129,14 +132,14 @@ if(!isset($_SESSION['userId'])){
             search.change(function (event){
                 keyword = $(this).val();
                 console.log(keyword);
-                $.ajax({
-                    type: "POST",
-                    url: "ajax/homeitrack.search.php",
-                    dataType: 'json',
-                    data: {
-                        search : keyword
-                    },
-                    success: function(response){
+                    $.ajax({
+                        type: "POST",
+                        url: "ajax/homeitrack.search.php",
+                        dataType: 'json',
+                        data: {
+                            search : keyword
+                        },
+                        success: function(response){
                         $('#table-body').html('');
                         $.each(response, function(k, v){
                             tr = $('<tr></tr>');

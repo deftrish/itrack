@@ -12,12 +12,11 @@ if (isset($_POST['signup-submitAd'])) {
 	$lastName = $_POST['lname'];
 	$username = $_POST['username'];
 	$position = $_POST['position'];
-	$email = $_POST['email'];
 	$user_type = $_POST['role'];
 	$password = $_POST['password'];
 	$passwordRepeat = $_POST['cpassword'];
 
-	if (empty($firstName) || empty($middleName) ||empty($lastName) || empty($password) || empty($passwordRepeat)) {
+	if (empty($firstName) || empty($middleName) ||empty($lastName) || empty($password) || empty($passwordRepeat) || empty($username)) {
 		header("Location: ../signupAdmin.php?error=emptyfields"); 
 		exit();
 	}
@@ -28,7 +27,7 @@ if (isset($_POST['signup-submitAd'])) {
 	else{
 
 		$hashedPwd =password_hash($password, PASSWORD_DEFAULT);
-		$sql = "INSERT INTO users (fnameUser, mnameUser, lnameUser, uidUsers, emailUsers, pwdUsers, isAdmin) VALUES ('$firstName', '$middleName', '$lastName', '$userName', '$email', '$hashedPwd', 1)";
+		$sql = "INSERT INTO users (fnameUser, mnameUser, lnameUser, uidUsers, pwdUsers, isAdmin) VALUES ('$firstName', '$middleName', '$lastName', '$username', '$hashedPwd', 1)";
 		$conn->query($sql);
 		$id = $conn->insert_id;
 		$sql = "INSERT INTO admins (userID, admin_type) VALUES ($id, '$user_type')";

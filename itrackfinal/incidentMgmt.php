@@ -10,11 +10,11 @@
     
 
 ?>
-<!-- to follow na lang yung new header -->
+
 <!DOCTYPE html>
 <html lang="en">
 <title>Incident Management</title>
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="assets/css/style.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 <body>
@@ -50,8 +50,8 @@
                 <thead>
                     <th>Incident Ticket Number</th>
                     <th>Incident</th>
-                    <th>Date and Time</th>
-                    <th>Investigator on Case</th>
+                    <th>Date and Time Created</th>
+                    <th>Filed by</th>
                     <th>Incident Report</th>
                 </thead>
                 <tbody>
@@ -65,6 +65,7 @@
                     <?php }else { 
                         while($row = $result->fetch_array()){
                             $report = $row['incidentReport'];
+                            $id = $row['incidentTicket'];
                             $report = (strlen($report) > 20) ? substr($report, 0, 20) . '...' : $report;
                             $userName = $row['fnameUser'].' '.$row['lnameUser'];
                             echo '<tr>';
@@ -72,7 +73,9 @@
                             echo '<td>'.$row['incident'].'</td>';
                             echo '<td>'.$row['date_time'].'</td>';
                             echo "<td>$userName</td>";
+                            //hindi pa din po nakikita kung sino yung nagsubmit
                             echo "<td>$report</td>";
+                            echo "<td><a href='itmsview_incidentmgmt.php?id=$id'>Edit Details</a></td>";
                             echo '</tr>';
                         }
                     } ?>

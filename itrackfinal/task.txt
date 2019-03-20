@@ -1,15 +1,23 @@
 TO DO LIST
 
+WORK HUSTLE
+1. Edit admins to be visible in db 
+2. Make “Filed by” reflect in table 
+3. Incident details doesnt mirror in edit details page
+4. Filter search ticket
+5. Close case button
+6. Then redirect to Incident history 
+7. Return to incident page when re opened
+8. Indicate who edited the remarks 
+9. Add account only accessible to DIDM and ITMS (TRUE)
+10. Time closed of the ticket and how long it was running (Incident Management History)
+11. Generate reports
+12. Can delete account admin
 
-- dashboard
-- incident management (updte add close archive)
-- asset mangement       
-- case archive button
-- filter complainant access  management
-- addCase.php fix UI
- - edit remarks probs editCase.php (okay but it go to another column)
-
-
+REVISIONS
+1. Remove email address (DONE BY PAU)
+2. Remarks timestamp when the remarks was created and who placed the remarks
+3. Archive of files 
 access:
 
 COMPLAINANT
