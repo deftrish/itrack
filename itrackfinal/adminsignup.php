@@ -55,7 +55,7 @@
                             <div class="col-lg-4">
                             <b>Position</b>
                             <select name="dropdown" name="dropdown" class=form-control>
-                                <option value="choose" selected>Choose...</option>
+                            <option value="choose" disabled selected hidden>Choose...</option>
                                 <option value="NUP">NUP</option>
                                 <option value="PO1">PO1</option>
                                 <option value="PO2">PO2</option>
@@ -63,6 +63,7 @@
                                 <option value="SPO1"> SPO1</option>
                                 <option value="SPO2">SPO2</option>
                                 <option value="SPO3">SPO3</option>
+                                
                             </select>
                             </div>
 
@@ -76,15 +77,26 @@
                         <div class="row">
                         <div class="col-lg-4">
                             <b>PRO</b>
-                            <select name="dropdown" name="dropdown" class=form-control>
-                                <option value="choose" selected>Choose...</option>
+                            <select name="dropdown" name="dropdown" onmousedown="if(this.options.length>5)
+                            {this.size=5;}" onchange='this.size=0;' onblur='thi.size=0;'  class=form-control>
+                                <option value="choose" disabled selected hidden>Choose...</option>
                                 <option value="NCRPO">NCRPO</option>
                                 <option value="PRO1">PRO 1</option>
                                 <option value="PRO2">PRO 2</option>
                                 <option value="PRO3">PRO 3</option>
-                                <option value="PRO4-A">PRO4-A</option>
-                                <option value="PRO4-B">PRO4-B</option>
-                                <option value="PRO5">PRO4 5</option>
+                                <option value="PRO4-A">PRO 4-A</option>
+                                <option value="PRO4-B">PRO 4-B</option>
+                                <option value="PRO5">PRO 5</option>
+                                <option value="PRO6">PRO 6</option>
+                                <option value="PRO7">PRO 7</option>
+                                <option value="PRO8">PRO 8</option>
+                                <option value="PRO9">PRO 9</option>
+                                <option value="PRO10">PRO 10</option>
+                                <option value="PRO11">PRO 11</option>
+                                <option value="PRO12">PRO 12</option>
+                                <option value="PRO13">PRO 13</option>
+                                <option value="PROCOR">PRO COR</option>
+                                <option value="PROARMM">PRO ARMM</option>
                             </select>
                         </div>
 

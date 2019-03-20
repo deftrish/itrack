@@ -84,7 +84,6 @@ if(!isset($_SESSION['userId'])){
 					<textarea class="scrollabletextbox" name="report"  rows="4.5" cols="130">
 					</textarea>
 					</div>
-
                     <br>
  					<div class="col-lg-9">
  					<input class="btn btn-primary" type="submit" name="incident-submit" value="Submit">

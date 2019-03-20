@@ -64,7 +64,7 @@
                 <tbody>
                     <?php
                         while($row = mysqli_fetch_assoc($result)){
-                            $name = $row['fnameUser'] . $row['lnameUser'];
+                            $name = $row['fnameUser'] . ' '  . $row['lnameUser'];
                             switch($row['admin_type']){
                                 case 'didm':
                                     $userType = 'DIDM Admin';
