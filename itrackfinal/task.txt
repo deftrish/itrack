@@ -1,18 +1,18 @@
 TO DO LIST
 
 WORK HUSTLE
-1. Edit admins to be visible in db 
+1. Edit admins to be visible in db (DONE)
 2. Make “Filed by” reflect in table (DONE BY KUYA)
 3. Incident details doesnt mirror in edit details page (DONE BY B)
-4. Filter search ticket (TRISH PAGAWA NALANG TO)
-5. Close case button 
-6. Then redirect to Incident history 
+4. Filter search ticket (TRISH PAGAWA NALANG TO) (DONE)
+5. Close case button (DONE)
+6. Then redirect to Incident history (DONE)
 7. Return to incident page when re opened
 8. Indicate who edited the remarks 
-9. Add account only accessible to DIDM and ITMS 
+9. Add account only accessible to DIDM and ITMS (what account?)
 10. Time closed of the ticket and how long it was running (Incident Management History)
 11. Generate reports
-12. Can delete account admin
+12. Can delete account admin (Done)
 
 REVISIONS
 1. Remove email address (DONE BY PAU)

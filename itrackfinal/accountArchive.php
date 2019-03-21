@@ -59,11 +59,13 @@
                     <tr>
                         <th>Name</th>
                         <th>Position</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                         while($row = mysqli_fetch_assoc($result)){
+                            $id = $row['idUsers'];
                             $name = $row['fnameUser'] . ' '  . $row['lnameUser'];
                             switch($row['admin_type']){
                                 case 'didm':
@@ -85,6 +87,7 @@
                             echo "<tr>";
                             echo "<td>$name</td>";
                             echo "<td>$userType</td>";
+                            echo "<td><a href='includes/recoverAccount.inc.php?id=$id'>Recover</a></td>";
                             echo "</tr>";
                         }
 

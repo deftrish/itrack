@@ -4,7 +4,7 @@
         header('Location: index.php');
     }
     include 'includes/dbh.inc.php';
-    $sql = "SELECT * from incident_mgmt join users on incidentInv = idUsers";
+    $sql = "SELECT * from incident_mgmt left join users user2 on closed_by = user2.idUsers  join users user1 on incidentInv  = user1.idUsers where is_closed = 1";
     $result = $conn->query($sql);
 	require "adminheader.php"; 
     
@@ -51,7 +51,6 @@
                     <th>Filed by</th>
                     <th>Incident Report</th>
                     <th>Date and Time Resolved</th>
-                    <th>Resolved By</th>
                 </thead>
                 <tbody>
                     <?php
@@ -63,17 +62,18 @@
                             $report = $row['incidentReport'];
                             $report = (strlen($report) > 20) ? substr($report, 0, 20) . '...' : $report;
                             $userName = $row['fnameUser'].' '.$row['lnameUser'];
+                            $resolvedAt = $row['resolved_at'];
                             echo '<tr>';
                             echo '<td>'.$row['incidentTicket'].'</td>';
                             echo '<td>'.$row['incident'].'</td>';
                             echo '<td>'.$row['date_time'].'</td>';
                             echo "<td>$userName</td>";
-                            //hindi pa din po nakikita kung sino yung nagsubmit
-                            echo "<td></td>";
+                            echo "<td>$report </td>";
+                            echo "<td>$resolvedAt</td>";
                             //pareflect yung short description here located at "edit details"
-                            echo "<td></td>";
+                            // echo "<td></td>";
                             // insert date and time resolve
-                            echo "<td><a href='itmsview_incidentmgmt.php'>Edit Details</a></td>";
+                            // echo "<td><a href='itmsview_incidentmgmt.php'>Edit Details</a></td>";
                             echo '</tr>';
                         }
                     } ?>

@@ -1,6 +1,5 @@
 <?php
     session_start();
-    
     include 'includes/admin.inc.php';
     require "adminheader.php";
     include_once 'includes/admin.inc.php';

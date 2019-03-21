@@ -4,7 +4,7 @@
         header('Location: index.php');
     }
     include 'includes/dbh.inc.php';
-    $sql = "SELECT * from incident_mgmt join users on incidentInv = idUsers";
+    $sql = "SELECT * from incident_mgmt join users on incidentInv = idUsers where is_closed = 0";
     $result = $conn->query($sql);
 	require "adminheader.php"; 
     
@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="input-group">
-                    <input class="form-control py-2 border-right-0 border" type="text" placeholder="Search Ticket Number" class=form-control>
+                    <input id="search" class="form-control py-2 border-right-0 border" type="text" placeholder="Search Ticket Number" class=form-control>
                     <span class="input-group-append">
                         <button class="btn btn-outline-secondary border-left-0 border" type="button">
                             <i class="fa fa-search"></i>
@@ -54,7 +54,7 @@
                     <th>Filed by</th>
                     <th>Incident Report</th>
                 </thead>
-                <tbody>
+                <tbody id="table-body">
                     <?php
                         if($conn->affected_rows == 0){
                     ?>
@@ -81,24 +81,39 @@
                     } ?>
                 </tbody>
             </table>
+            <script src="js/jquery-3.3.1.min.js"></script>
             <script>
             $(document).ready(function(){
             var search = $('#search');
             search.change(function (event){
                 keyword = $(this).val();
-                console.log(keyword);
-                    $.ajax({
-                        type: "POST",
-                        url: "ajax/incident_mgmt.search.php",
-                        dataType: 'json',
-                        data: {
-                            search : keyword
-                        },
-                       
-                        
+                $.ajax({
+                    type: "POST",
+                    url: "ajax/incidentMgmt.search.php",
+                    dataType: 'json',
+                    data: {
+                        search : keyword
                     },
-
-                })
+                    success: function(response){
+                        $('#table-body').html('');
+                        $.each(response, function(k, v){
+                            tr = $('<tr></tr>');
+                            tr.append('<td>'+v.incidentTicket+'</td>');
+                            tr.append('<td>'+v.incident+'</td>');
+                            tr.append('<td>'+v.date_time+'</td>');
+                            tr.append('<td>'+v.fnameUser + ' ' + v.lnameUser+'</td>');
+                            tr.append('<td>'+v.report+'</td>');
+                            if(v.dateCompl == null){
+                                tr.append('<td></td>');
+                            }else{
+                                tr.append('<td>'+v.dateCompl+'</td>');
+                            }
+                            tr.append('<td><a href="itmsview_incidentmgmt.php?id=$id'+ v.incidentTicket+'">Edit Details</a></td>');
+                            $('#table-body').append(tr);
+                        });
+                        
+                    }
+                });
             });
         })
         </script>

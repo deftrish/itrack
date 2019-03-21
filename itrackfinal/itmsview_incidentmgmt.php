@@ -57,7 +57,7 @@
                            <br>
                            <br>
                            <button  type="cancel" id="cancelincident" class="btn btn-primary" formation="/homeitrack.php">
-                            <a href= "IncidentMgmt.php" style="color:white;text-decoration:none">Close Case</a>
+                            <a href= "includes/closeIncident.inc.php?id=<?=$id?>" style="color:white;text-decoration:none">Close Case</a>
                             </button> <!----- Si ITMS lang ang pwede magclick ng button na to-->   
                             <br>
                             <br>

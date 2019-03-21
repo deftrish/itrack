@@ -5,6 +5,6 @@
     $id = $_GET['id'];
     $sql = "UPDATE users set isDeleted = 1 where idUsers = $id";
     $conn->query($sql);
-    header('Location: ../accMgmt.php');
+    header('Location: ../acctMgmt.php');
 
 ?>
