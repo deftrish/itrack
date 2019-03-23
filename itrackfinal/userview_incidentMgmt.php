@@ -20,24 +20,6 @@
 <body>
  <br>
  <div class="container">
- <div class="row justify-content-end">
- <div class = "col-md-4 offset-md-4">
- 					              <button  type="submit" id="sendincidentcategory" class="btn btn-primary" formation="/homeitrack.php">
-                            <a href= "IncidentMgmt.php" style="color:white;text-decoration:none">Re-Open</a>
-                           </button> <!---Na enable lang yung button na to if nakaclose na yung case tapos nag occur na naman yung problem-->
-                           <br>
-                            <br>
-                            <button  type="cancel" id="archiveIncident" class="btn btn-primary" formation="/homeitrack.php">
-                            <a href= "IncidentMgmt.php" style="color:white;text-decoration:none">Archive</a>
-                            </button>  <!--- Si ITMS or yung nagsubmit lang yung pwede magclick ng button na to. Pagkaclick, mapupunta na siya sa incident history-->
-                            <br>
-                            <br>
-                            <button  type="cancel" id="cancel" class="btn btn-primary" formation="/homeitrack.php">
-                            <a href= "IncidentMgmt.php" style="color:white;text-decoration:none">Cancel</a>
-                            </button>  <!--- Si ITMS or yung nagsubmit lang yung pwede magclick ng button na to. Pagkaclick, mapupunta na siya sa incident history-->
-                        </div>
- 
- </div>
 	 	<div class="row">
      
           <div class="col-8">
@@ -87,7 +69,11 @@
           </div>
           </div>
           </tbody>
-          </table>      
+          </table>
+          <button  type="cancel" id="cancel" class="btn btn-primary" formation="/homeitrack.php">
+                    <a href= "userview_incidenthomepage.php" style="color:white;text-decoration:none">Close</a>
+          </button>  <!--Ayaw niya pong mag redirect sa userview homepage located at "newUI" folder--> 
+          </div>      
           </body>
           </html>
 

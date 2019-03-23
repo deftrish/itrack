@@ -53,6 +53,7 @@
                     <th>Date and Time Created</th>
                     <th>Filed by</th>
                     <th>Incident Report</th>
+                    <th>Option</th>
                 </thead>
                 <tbody id="table-body">
                     <?php

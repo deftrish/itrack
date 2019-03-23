@@ -8,16 +8,9 @@
 
     require 'includes/dbh.inc.php';
 
-    if(isset($_POST['search'])){
-        $valueToSearch = $_POST['valueToSearch'];
-        // search in all table columns
-        // using concat mysql function
-        $query = "SELECT * FROM feedback WHERE CONCAT('benNum', 'feed_comments', 'dateAns') LIKE '%$valueToSearch%'";
-        $search_result = filterTable($query);
-    }else{
-        $query = "SELECT * FROM feedback";
-        $result = $conn->query($query);
-    }
+
+    $query = "SELECT * FROM feedback";
+    $result = $conn->query($query);
 ?>
 
 <!DOCTYPE html>
@@ -37,19 +30,25 @@
 
 <body>
 	<br>
-	<br>
-	<br>
-	<br>
     <div class="container">
 
-        <div class="row">
+        <!--<div class="row">
+        <div class="col-md-4">
+        <div class="input-group">
+            <form action="feedback.php" method="post">
+            <input type="text" id="myInput" onkeyup="myFunction()" name="valueToSearch" placeholder="Value To Search">
+            <span class="input-group-append">
+            <button class="btn btn-outline-secondary border-left-0 border" type="button">
+            <i class="fa fa-search"></i>
+            </button>
+            </span>
+            </div>
+            </div> -->
+
+            <div class="row">
             <div class="col-md-4">
                 <div class="input-group">
-                
-
-                <form action="feedback.php" method="post">
-            <input type="text" id="myInput" onkeyup="myFunction()" name="valueToSearch" placeholder="Value To Search"><br><br>
-
+                    <input id="search" class="form-control py-2 border-right-0 border" type="text" placeholder="Search Blotter Entry Number/Comment" >
                     <span class="input-group-append">
                         <button class="btn btn-outline-secondary border-left-0 border" type="button">
                             <i class="fa fa-search"></i>
@@ -78,7 +77,7 @@
                         <th>Date</th>
                 
                     </thead>
-                    <tbody>
+                    <tbody id="table-body">
                     <?php while($row = mysqli_fetch_array($result)):?>
                 <tr>
                     <td><?php echo $row['benNum'];?></td>
@@ -94,41 +93,40 @@
         </div>
 
     </div>
+    <script src="js/jquery-3.3.1.min.js"></script>
     <script>
-        function myFunction() {
+    $(document).ready(function(){
+        let populateTable = function(k, v){
+            tr = $('<tr></tr>');
+            tr.append('<td>'+v.benNum+'</td>');
+            tr.append('<td>'+v.feed_comments+'</td>');
+            if(v.dateAns == null){
+                tr.append('<td></td>');
+            }else{
+                tr.append('<td>'+v.dateAns+'</td>');
+            }
+            $('#table-body').append(tr);
+        }
+        let fetchData = function (event){
+            let keyword = $('#search').val();
+            console.log(keyword);
+            $.ajax({
+                type: "POST",
+                url: "ajax/feedback.search.php",
+                dataType: 'json',
+                data: {
+                    search : keyword,
+                },
+                success: function(response){
+                    console.log(response);  
+                    $('#table-body').html('');
+                    $.each(response, populateTable);
+                },
+            });
+        }
+        $('#search').change(fetchData);
+    })
 
-// Declare variables 
-var input = document.getElementById("myInput");
-var filter = input.value.toUpperCase();
-var table = document.getElementById("myTable");
-var trs = table.tBodies[0].getElementsByTagName("tr");
-
-// Loop through first tbody's rows
-for (var i = 0; i < trs.length; i++) {
-
-  // define the row's cells
-  var tds = trs[i].getElementsByTagName("td");
-
-  // hide the row
-  trs[i].style.display = "none";
-
-  // loop through row cells
-  for (var i2 = 0; i2 < tds.length; i2++) {
-
-    // if there's a match
-    if (tds[i2].innerHTML.toUpperCase().indexOf(filter) > -1) {
-
-      // show the row
-      trs[i].style.display = "";
-
-      // skip to the next row
-      continue;
-
-    }
-  }
-}
-
-}
     </script>
     <script src="js/jquery-3.3.1.slim.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>

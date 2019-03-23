@@ -24,44 +24,29 @@ if(!isset($_SESSION['userId'])){
 
 <body>
     <br>
-    <br>
-    <br>
 <br>
     <div class="container">
 
         <div class="row">
-            <div class="col-md-12">
-                
-            </div>
-    </div>
-        <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <div class="input-group">
-                    <input id="search" class="form-control py-2 border-right-0 border" type="text" >
+                    <input id="search" class="form-control py-2 border-right-0 border" type="text"placeholder="Search Blotter Entry Number/Offense" >
                     <span class="input-group-append">
                         <button class="btn btn-outline-secondary border-left-0 border" type="button">
                             <i class="fa fa-search"></i>
                         </button>
                     </span>
-                </div>
-            </div>
-
-        
-            <div class="col-md-4">
-                <div class="form-group">
-                    
-                    <select class="form-control" id="exampleFormControlSelect1">
-                         <option value="choose" name="status">Status</option>
-                         <option value="underinvestigation" name="status">Under Investigation</option>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <select id="statusFilter" class="form-control py-2 border-right-0 border" id="exampleFormControlSelect1">
+                         <option value="all" name="status">All</option>
+                         <option value="under_investigation" name="status">Under Investigation</option>
                          <option value="cleared" name="status">Cleared</option>
                          <option value="solved" name="status">Solved</option>
                     </select>
-            
                 </div>
-            </div>
-
+            </div>  
         </div>
-
+        <br>
         <div class="row">
             <div class="col-md-12">
                 <table id="myTable">
@@ -117,7 +102,10 @@ if(!isset($_SESSION['userId'])){
                         ?>
                     </tbody>
                 </table>
-                </table>
+                <button  type="button" name="printReport" class="btn btn-primary" formation="/homeitrack.php">
+                            <a href= '#' style="color:white;text-decoration:none">Print Report</a>
+                <!-- nagerror kapag nililink namin sa "printreport.php"-->
+                </button>
             </div>
         </div>
     </div>
@@ -128,56 +116,55 @@ if(!isset($_SESSION['userId'])){
     
     <script>
         $(document).ready(function(){
-            var search = $('#search');
-            search.change(function (event){
-                keyword = $(this).val();
-                console.log(keyword);
-                    $.ajax({
-                        type: "POST",
-                        url: "ajax/homeitrack.search.php",
-                        dataType: 'json',
-                        data: {
-                            search : keyword
-                        },
-                        success: function(response){
-                        $('#table-body').html('');
-                        $.each(response, function(k, v){
-                            tr = $('<tr></tr>');
-                            tr.append('<td>'+v.benNum+'</td>');
-                            tr.append('<td>'+v.compOffense+'</td>');
-                            tr.append('<td>'+v.dateComi+'</td>');
-                            if(v.compStatus == 'under_investigation'){
-                                tr.append("<td class='text-danger'> Under Investigation </td>");
-                            }else if(v.compStatus == 'cleared'){
-                                tr.append("<td class='text-infor'> Cleared </td>");
-                            }else if(v.compStatus == 'solved'){
-                                tr.append("<td class='text-success'> Solved </td>");    
-                            }else{
-                                tr.append("<td > Status Unknown </td>");                        
-                            }
-                            
-                            tr.append('<td>'+v.compInv+'</td>');
-                            tr.append('<td>'+v.compRemarks+'</td>');
-                            if(v.dateCompl == null){
-                                tr.append('<td></td>');
-                            }else{
-                                tr.append('<td>'+v.dateCompl+'</td>');
-                            }
-                            tr.append('<td><a href="editRemarks.php?id='+ v.benNum+'">Edit Remarks</a></td>');
-                            $('#table-body').append(tr);
-                        });
-                        
+            let populateTable = function(k, v){
+                tr = $('<tr></tr>');
+                tr.append('<td>'+v.benNum+'</td>');
+                tr.append('<td>'+v.compOffense+'</td>');
+                tr.append('<td>'+v.dateComi+'</td>');
+                if(v.compStatus == 'under_investigation'){
+                    tr.append("<td class='text-danger'> Under Investigation </td>");
+                }else if(v.compStatus == 'cleared'){
+                    tr.append("<td class='text-infor'> Cleared </td>");
+                }else if(v.compStatus == 'solved'){
+                    tr.append("<td class='text-success'> Solved </td>");    
+                }else{
+                    tr.append("<td> Status Unknown </td>");                        
+                }
+                
+                tr.append('<td>'+v.compInv+'</td>');
+                tr.append('<td>'+v.compRemarks+'</td>');
+                if(v.dateCompl == null){
+                    tr.append('<td></td>');
+                }else{
+                    tr.append('<td>'+v.dateCompl+'</td>');
+                }
+                tr.append('<td><a href="editRemarks.php?id='+ v.benNum+'">Edit Remarks</a></td>');
+                $('#table-body').append(tr);
+            }
+            let fetchData = function (event){
+                console.log("sfsdf");
+                let keyword = $('#search').val();
+                let filter = $('#statusFilter').val();
+                $.ajax({
+                    type: "POST",
+                    url: "ajax/homeitrack.search.php",
+                    dataType: 'json',
+                    data: {
+                        search : keyword,
+                        filter : filter
                     },
-
-                })
-            });
+                    success: function(response){
+                        console.log(response);  
+                        $('#table-body').html('');
+                        $.each(response, populateTable);
+                    },
+                });
+            }
+            $('#search').change(fetchData);
+            $('#statusFilter').change(fetchData);;
         })
     </script>
 </body>
 
 </html>
 
-
-<?php
-    
-?>

@@ -1,9 +1,5 @@
 <?php
-session_start();
-    require "viewingheader.php";
-    if(isset($_SESSION['userId'])){
-        header("Location: index.php");
-    }
+require "loginheader.php";
 ?>
 
 

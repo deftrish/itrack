@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <style>
-    .content {
+.content {
   max-width: 800px;
   margin: auto;
   background: white;
@@ -51,7 +51,7 @@
 
 <div class="container">
         <a href="signupAdmin.php" class="btn-xl">+ Add Account</a>
-        <a href="accountArchive.php" style="background: green;color:white" class="btn-xl">Archive</a>
+        <a href="accountArchive.php" style="background: #24ADE1;color:white" class="btn-xl">Archive</a>
     <br>
     <div class="row">
         <div class="col-sm-6 offset-sm-3">
@@ -60,6 +60,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Position</th>
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Options<th>
                     </tr>
                 </thead>
                 <tbody>

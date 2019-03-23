@@ -43,8 +43,6 @@
 <body>
     <br>
     <br>
-    <br>
-    <br>
     <div class="container">
         <?php if(isset($error)) : ?>
             <div class="alert alert-danger" role="alert">
@@ -54,6 +52,7 @@
         <div class="row">
             <div class="col-sm-6 offset-sm-3">
                 <table class="table">
+                <h1>Case Details</h1>
                     <tbody>
                         <tr>
                             <td>Offense</td>
