@@ -5,73 +5,62 @@ if(isset($_SESSION['userId'])){
 }
 if (isset($_POST['signup-submit'])) {
 
-require 'dbh.inc.php';
+	require 'dbh.inc.php';
 
-$referenceNum = $_POST['rnumber'];
-$firstName = $_POST['fname'];
-$middleName = $_POST['mname'];
-$lastName = $_POST['lname'];
-$userName = $_POST['uidUsers'];
-$password = $_POST['password'];
-$passwordRepeat = $_POST['cpassword'];
+	$referenceNum = $_POST['rnumber'];
+	$firstName = $_POST['fname'];
+	$middleName = $_POST['mname'];
+	$lastName = $_POST['lname'];
+	$userName = $_POST['uidUsers'];
+	$password = $_POST['password'];
+	$passwordRepeat = $_POST['cpassword'];
 
-if (empty($referenceNum) || empty($firstName) || empty($middleName) ||empty($lastName) || empty($password) || empty($passwordRepeat)) {
- 	header("Location: ../signupComplainant.php?error=emptyfields"); 
- 	exit();
-}
-else if ($password !== $passwordRepeat){
-	header("Location: ../signupComplainant.php?error=passswordcheck&rnumber=".$referenceNum."&fname=".$firstName); 
- 	exit();
-}
-else{
+	if (empty($referenceNum) || empty($firstName) || empty($middleName) ||empty($lastName) || empty($password) || empty($passwordRepeat)) {
+		header("Location: ../signupComplainant.php?error=emptyfields"); 
+		exit();
+	}
+	else if ($password !== $passwordRepeat){
+		header("Location: ../signupComplainant.php?error=passswordcheck&rnumber=".$referenceNum."&fname=".$firstName); 
+		exit();
+	}
+	else{
 
-	    $sql = "SELECT benNum FROM adminview WHERE benNum = ?";
-	    $stmt = mysqli_stmt_init($conn);
-	    if (!mysqli_stmt_prepare($stmt, $sql)) {
-	    	header("Location: ../signupComplainant.php?error=sqlerror");
-	    	exit();
-	    }
-	    else {
-	    	mysqli_stmt_bind_param($stmt, "s", $referenceNum);
-	    	mysqli_stmt_execute($stmt);
-	    	mysqli_stmt_store_result($stmt);
-	    	$resultCheck = mysqli_stmt_num_rows($stmt);
-	    	if ($resultCheck > 0){
-	    		header("Location: ../signupComplainant.php?error=referencenumbertaken&mail=".$firstname);
-	    		exit();
+		$sql = "SELECT * FROM adminview WHERE benNum = $referenceNum";
+		$result = $conn->query($sql);
+		if ($conn->affected_rows == 0){
+			header("Location: ../signupComplainant.php?error=refererenceNumber");
+			exit();
+		}
+		$row = $result->fetch_array();
+		if($row['userID']){
+			header('Location: ../signupComplainant.php?error=accountExist');
+			exit();
+		}
+		$sql = "INSERT INTO users (fnameUser, mnameUser, lnameUser, uidUsers, pwdUsers, isAdmin) VALUES (?, ?, ?, ?, ?, 0)";
+		$stmt = mysqli_stmt_init($conn);
+		if (!mysqli_stmt_prepare($stmt, $sql)){
+			header("Location: ../signupComplainant.php?error=sqlerrors");
+			exit();
+		}
+		$hashedPwd =password_hash($password, PASSWORD_DEFAULT);
+		mysqli_stmt_bind_param($stmt, "sssss", $firstName, $middleName, $lastName, $userName, $hashedPwd);
+		mysqli_stmt_execute($stmt);
+		$id = mysqli_stmt_insert_id($stmt);
+		$sql = "UPDATE adminview set userID = $id where benNum = $referenceNum";
+		$conn->query($sql);
+		$_SESSION['userId'] = $id;
+		$_SESSION['userUid'] = $userName;
+		$_SESSION['isAdmin'] = false;
+		header("Location: ../feedbackform.php");
+	}
 
-	    	}
- 
-	    	else {
-	    		$sql = "INSERT INTO users (fnameUser, mnameUser, lnameUser, uidUsers, pwdUsers, isAdmin) VALUES (?, ?, ?, ?, ?, ?, 0)";
-	    		$stmt = mysqli_stmt_init($conn);
-	    		if (!mysqli_stmt_prepare($stmt, $sql)){
-	    			header("Location: ../signupComplainant.php?error=sqlerror");
-	    			exit();
-	    		}
-	    		else {
-	    			$hashedPwd =password_hash($password, PASSWORD_DEFAULT);
+		mysql_stmt_close($stmt);
+		mysqli_close($conn);
 
-	    			mysqli_stmt_bind_param($stmt, "ssssss", $firstName, $middleName, $lastName, $userName, $hashedPwd);
-					mysqli_stmt_execute($stmt);
-					$_SESSION['userId'] = mysqli_stmt_insert_id($stmt);
-					$_SESSION['isAdmin'] = false;
-	    			header("Location: ../signupComplainant.php?signup=success");
-	    			exit();
-	    	}
-	    }
-}
 
-}
-	mysql_stmt_close($stmt);
-	mysqli_close($conn);
-
-}
-else{
+}else{
 
 	header("Location ../signupComplainant.php?signupComplainant.php");
 	exit();
-
-
 
 }

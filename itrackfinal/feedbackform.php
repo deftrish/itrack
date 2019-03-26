@@ -130,9 +130,9 @@ session_start();
             <input type="hidden" name="benNum" value="<?php echo $_GET['id']; ?>">
             <button type="submit" name="submit-feedback" class="btn btn-primary">Submit</button>
         </form>
-    <?php }else{ ?>
-        Yay!!! Thanks
-    <?php } ?>
+    <?php }else{ 
+        header('Location: index.php');
+     } ?>
 
 </center>
 

@@ -36,8 +36,12 @@
 						echo 'Please Enter Username and Password';
 					}elseif ($error == 'wrongpwd') {
 						echo 'Wrong Password';
+					}elseif ($error == 'benNum'){
+						echo 'Reference Number doesn\'t exist';
 					}elseif ($error == 'nouser') {
 						echo 'Invaid username and password';
+					}else{
+						echo 'Something went wrong';
 					}
 				?>
 				</div>

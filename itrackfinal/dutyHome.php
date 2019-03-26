@@ -6,10 +6,6 @@ if(!isset($_SESSION['userId'])){
 if(!$_SESSION['isAdmin']){
     header('Location: index.php');    
 }
-if($_SESSION['type'] == 'investigator'){
-    header("Location: dutyHome.php");          
-    exit();
-}
     require "adminheader.php";
 ?>
 <?php
@@ -120,7 +116,7 @@ if($_SESSION['type'] == 'investigator'){
                             echo "<td> $compRemarks </td>";
                             echo "<td>$name</td>";
                             echo "<td> $dateCompl </td>";
-                            echo "<td>&nbsp;<a href='caseDetails.php?id=$benNum' class='text-success'>View Details</a></td>";
+                            echo "<td><a href='editRemarks.php?id=$benNum'>Edit Remarks</a>&nbsp;|&nbsp;<a href='caseDetails.php?id=$benNum' class='text-success'>View Details</a></td>";
                             echo "</tr>";
                         }
                         ?>
@@ -174,7 +170,7 @@ if($_SESSION['type'] == 'investigator'){
                 }else{
                     tr.append('<td>'+v.dateCompl+'</td>');
                 }
-                tr.append('<td><a href="caseDetails.php?id='+v.benNum+'" class="text-success">View Details</a></td>');
+                tr.append('<td><a href="editRemarks.php?id='+ v.benNum+'">Edit Remarks</a>|<a href="caseDetails.php?id='+v.benNum+'" class="text-success">View Details</a></td>');
                 $('#table_id').append(tr);
 
                 //<a href='editRemarks.php?id=$benNum'>Edit Remarks</a> &nbsp;|&nbsp;<a href='caseDetails.php' class='text-success'>View Details</a>

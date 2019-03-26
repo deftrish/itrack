@@ -51,9 +51,7 @@
  <div class="container">
  <div class="row justify-content-end">
  <div class = "col-md-4 offset-md-4">
-                           <button  type="cancel" id="cancelincident" class="btn btn-primary" formation="/homeitrack.php">
-                            <a href= "includes/closeIncident.inc.php?id=<?=$id?>" style="color:white;text-decoration:none">Close Case</a>
-                            </button> <!----- Si ITMS lang ang pwede magclick ng button na to-->   
+                            <a class='btn btn-primary' href= "includes/closeIncident.inc.php?id=<?=$id?>" style="color:white;text-decoration:none">Close Case</a>   
                         </div>
  
  </div>
@@ -128,7 +126,7 @@
                            <!--si ITMS ang ang pwedeng gumalaw ng incident details, ang pwede lang galawin ng nagsubmit is yung re-open, cancel incident, cancel button-->
 
                            <button  type="cancel" id="cancelincident" class="btn btn-primary" formation="/homeitrack.php">
-                            <a href= "IncidentMgmt.php" style="color:white;text-decoration:none"> Cancel</a>
+                            <a href= "incidentMgmt.php" style="color:white;text-decoration:none"> Cancel</a>
                             </button>    
                         </div>
 

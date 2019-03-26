@@ -1,22 +1,11 @@
 TO DO LIST
 
-WORK HUSTLE
-1. Edited by sa homeitrack. 
-2. Hindi pa nakalink sa mga complainant yung case nila 😞 
-3. Filters 
+WORK HUSTLE 
+2. Filters 
       - "userview_incidenthomepage" (Hindi pa to magagawa kasi hindi pa nakafetch yung data for it)
       - "print report.php"
-5. dashboards
-6. Sign up ng complainant 
-   Conditions:
-   a. Check if existing yung ben number 
-      (yes): Hindi pa ba siya nakakagawa ng account?
-            (yes) pwede siya mag sign up and isave sa users table
-            (no) meaning may account na siya so hindi na pwede 
-      (no): Hindi siya makakasign up kasi hindi existing yung ben num niya
-   b. Once na nakasign-up na direcho sa feedback then pagkasubmit, magdidirect na siya sa case niya :)
-   c. If mag lolog in siya, direcho case na niya wala ng feedback na magpopop-up.
-7. Incident Management
+3. dashboards
+4. Incident Management
       User/Kung sino yung nagsubmit POV
       a. Pagkapasok niya sa incident management makikita niya lang sa table is kung anong sinubmit niya
       which is the " userview_incidenthomepage.php "
@@ -24,20 +13,19 @@ WORK HUSTLE
             - pag na-close na ni ITMS yung finile niya dun niya lang pwede "ire-open" yung case
       c. Incident History button -> makikita niya lang dun yung mga sinubmit niya na case na close na
 
-8. Generate reports "homeitrack.php" 
+5. Generate reports "homeitrack.php" (IF POSSIBLE)
  a. Added: Print Report Button 
    - Click -> "printreport.php"
    - filter niya kung ano gusto niya makitang reports then once na okay na 
    - click print button then dapat mag coconvert na siya into pdf
 
-9. Hierchy of users 
 
 
 access:
 
 COMPLAINANT
-username: trishy
-password: jack
+username: Chacha
+password: paucha
 
 ADMIN
 username: admin 

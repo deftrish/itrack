@@ -135,8 +135,3 @@
 </body>
 
 </html>
-
-
-<?php
-	require "viewingfooter.php";
-?>

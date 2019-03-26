@@ -3,8 +3,13 @@
     if(!isset($_SESSION['userId'])){
         header('Location: index.php');
     }
+    $id = $_SESSION['userId'];
     include 'includes/dbh.inc.php';
-    $sql = "SELECT * from incident_mgmt left join users user2 on closed_by = user2.idUsers  join users user1 on incidentInv  = user1.idUsers where is_closed = 1";
+    if($_SESSION['type'] == 'itms'){
+        $sql = "SELECT * from incident_mgmt left join users user2 on closed_by = user2.idUsers  join users user1 on incidentInv  = user1.idUsers where is_closed = 1";
+    }else{
+        $sql = "SELECT * from incident_mgmt left join users user2 on closed_by = user2.idUsers  join users user1 on incidentInv  = user1.idUsers where is_closed = 1 and incidentInv = $id";
+    }
     $result = $conn->query($sql);
 	require "adminheader.php"; 
     
@@ -39,8 +44,6 @@
                            </button>
         </div>
 <br>
-        <!-- suggestion: Sort By date should be added next to the search bar -->
-        <!-- should we add another column for status? (e.g.: pending, resolved, etc.)-->
         <div class="row">
             <div class="container">            
                 <table class="table table-striped">
@@ -105,9 +108,10 @@
                             tr.append('<td>'+v.date_time+'</td>');
                             tr.append('<td>'+v.fnameUser + ' ' + v.lnameUser+'</td>');
                             tr.append('<td>'+v.report+'</td>');
-                            tr.append('<td>'+v.$resolvedAt+'</td>');
+                            tr.append('<td>'+v.resolved_at+'</td>');
+                            
                             //kuya ayaw lumabas ng resolvedAt "undefined"
-                            tr.append('<td><a href="reopenIncident.php">View Incident</a></td>');
+                            tr.append('<td><a href="reopenIncident.php?id='+v.incidentTicket+'">View Incident</a></td>');
                             $('#table-body').append(tr);
                         });
                         

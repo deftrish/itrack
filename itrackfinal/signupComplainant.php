@@ -1,4 +1,6 @@
 <?php
+session_start();
+$error = isset($_GET['error'])? $_GET['error'] : null;
 require "loginheader.php";
 ?>
 
@@ -25,7 +27,21 @@ require "loginheader.php";
 
                     <form action="includes/signupComplainant.inc.php" method="post">
                     <h4 class="loginheader" align="left">Sign up</h4>
-
+                    <?php if($error) : ?>
+                    <div class="alert alert-danger">
+                    <?php
+                        if($error == 'emptyfields'){
+                            echo 'Please Complete the From';
+                        }elseif ($error == 'passswordcheck') {
+                            echo 'Password do not match';
+                        }elseif ($error == 'refererenceNumber'){
+                            echo 'Reference Number doesn\'t exist';
+                        }elseif ($error == 'accountExist') {
+                            echo 'Existing Account is already associated to the Ref. Number';
+                        }
+                    ?>
+                    </div>
+                    <?php endif ;?>
                     
             	
             	       <div class="row">
@@ -77,14 +93,10 @@ require "loginheader.php";
                         <div class="row">
                             <div class="col-lg-6">
                             <br>
-                           <button  type="submit" name = "signup-submit" id="signup-submit" class="btn btn-primary">
-                            <a href="feedbackform.php" style="color:white;text-decoration:none"> Submit</a>
-                           </button>
+                            <input class="btn btn-primary" type="submit" name="signup-submit">
 
 
-                           <button  type="cancel" name="signup-cancel" id="signup-cancel" class="btn btn-primary" formation="/homeitrack.php">
-                            <a href= "index.php" style="color:white;text-decoration:none"> Cancel</a>
-                           </button>
+                            <a class="btn btn-primary" href= "index.php" style="color:white;text-decoration:none"> Cancel</a>
                        </div>
 
 

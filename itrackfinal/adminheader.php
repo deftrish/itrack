@@ -17,16 +17,20 @@
           <button class="dropbtn">Home&nbsp;&nbsp;</button>
         </a>
       </li>
+      <?php if(in_array($_SESSION['type'], ['didm', 'itms'])){?>
       <li class="nav-item" style="float:left;">
         <a class="nav-link" href="feedback.php">
           <button class="dropbtn">Feedback&nbsp;&nbsp;</button>
         </a> 
       </li>
+      <?php }?>
+      <?php if(in_array($_SESSION['type'], ['didm'])){?>
       <li>
-        <a class="nav-link" style="float:left;">
+        <a class="nav-link" style="float:left;" href="dashboard.php">
           <button class="dropbtn">Dashboard&nbsp;&nbsp;</button>
         </a>
       </li>          
+      <?php }?>
     </ul>
 </div>
 
@@ -35,7 +39,9 @@
 
   <div class="dropdown-content">
      <a href="incidentMgmt.php">Incident Management Log</a>
+  <?php if(in_array($_SESSION['type'], ['didm', 'itms'])){?>
   <a href="acctMgmt.php">Account</a>
+  <?php }?>
   <a href="includes/logout.inc.php">Sign out</a>
   </div>
   </div>

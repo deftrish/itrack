@@ -31,9 +31,9 @@ if (isset($_POST['signup-submitAd'])) {
 	else{
 
 		$hashedPwd =password_hash($password, PASSWORD_DEFAULT);
-		$sql = "UPDATE users fnameUser='$firstName', mnameUser='$middleName', lnameUser='$lastName', uidUsers='$username', pwdUsers='$hashedPwd', isAdmin = 1 where idUsers = $id";
+		$sql = "UPDATE users set fnameUser='$firstName', mnameUser='$middleName', lnameUser='$lastName', uidUsers='$username', pwdUsers='$hashedPwd', isAdmin = 1 where idUsers = $id";
 		$conn->query($sql);
-		$sql = "UPDATE admins userID = $id, admin_type= '$user_type'";
+		$sql = "UPDATE admins set userID = $id, admin_type= '$user_type' where userID = $id";
 		$conn->query($sql);
 		
 		// mysqli_stmt_execute	($stmt);

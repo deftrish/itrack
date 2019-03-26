@@ -1,7 +1,13 @@
 <?php
+    session_start();
+    $id = $_SESSION['userId'];
     require '../includes/dbh.inc.php';
     $keyword = $_POST['search'];
-    $sql = "SELECT * from incident_mgmt left join users user2 on closed_by = user2.idUsers  join users user1 on incidentInv  = user1.idUsers where (incident like '%$keyword%' or incidentTicket like '%$keyword%') and is_closed = 1";
+    if($_SESSION['type'] == 'itms'){
+        $sql = "SELECT * from incident_mgmt join users on incidentInv = idUsers where (incident like '%$keyword%' or incidentTicket like '%$keyword%') and is_closed = 1";        
+    }else{
+        $sql = "SELECT * from incident_mgmt join users on incidentInv = idUsers where (incident like '%$keyword%' or incidentTicket like '%$keyword%') and is_closed = 1  and idUsers = $id";
+    }
     $result = $conn->query($sql);
 
     $row = [];

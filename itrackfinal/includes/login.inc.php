@@ -12,7 +12,7 @@ if (isset($_POST['login-submit'])) {
 		exit();
 	}
 	else {
-		$sql = "SELECT *  FROM users WHERE uidUsers=?;";
+		$sql = "SELECT *  FROM users WHERE uidUsers=? and isDeleted = 0";
 		$stmt = mysqli_stmt_init($conn);
 		if (!mysqli_stmt_prepare($stmt, $sql)) {
 				header("Location: ../index.php?error=sqlerror");
@@ -30,13 +30,18 @@ if (isset($_POST['login-submit'])) {
 				exit();
 				}
 				else if ($pwdCheck == true){
- 					session_start();
- 					$_SESSION['userId'] = $row['idUsers'];
+					 session_start();
+					$id = $row['idUsers'];
+ 					$_SESSION['userId'] = $id;
 					$_SESSION['userUid'] = $row['uidUsers'];
 					$_SESSION['isAdmin'] = $row['isAdmin'];
+					if($row['isAdmin']){
+						$sql = "SELECT * from admins where userID = $id";
+						$result = $conn->query($sql);
+						$row = $result->fetch_array();
+						$_SESSION['type'] = $row['admin_type'];
+					}
 					header("Location: ../index.php");
-					
- 				
 					exit();
 				}
 				else {

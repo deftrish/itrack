@@ -3,6 +3,10 @@
   background-color: #24ade1;
 }
 
+.btn{
+  display: inline-flex;
+  align-items: center;
+}
 .navbar-brand {
   font-weight: bold;
 }

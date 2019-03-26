@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require "adminheader.php";
 ?>
 
@@ -74,7 +75,7 @@
                     
                     &nbsp;&nbsp;&nbsp;
                     <button  type="cancel" name="signup-cancelAd" id="signup-cancel" class="btn btn-primary">
-                            <a  href="#" style="color:white;text-decoration:none"> Cancel</a>
+                            <a  href="homeitrack.php" style="color:white;text-decoration:none"> Cancel</a>
                    </button>
     
             </div>

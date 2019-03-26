@@ -3,13 +3,6 @@ session_start();
 if(!isset($_SESSION['userId'])){
     header('Location: index.php');
 }
-if(!$_SESSION['isAdmin']){
-    header('Location: index.php');    
-}
-if($_SESSION['type'] == 'investigator'){
-    header("Location: dutyHome.php");          
-    exit();
-}
     require "adminheader.php";
 ?>
 <?php
@@ -23,12 +16,10 @@ if($_SESSION['type'] == 'investigator'){
     <title>iTrack</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
 </head>
 <style>
-    
+
 </style>
 
 <body>
@@ -37,7 +28,7 @@ if($_SESSION['type'] == 'investigator'){
     <div class="container">
 
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-4">
                 <div class="input-group">
                     <input id="search" class="form-control py-2 border-right-0 border" type="text"placeholder="Search Blotter Entry Number/Offense" >
                     <span class="input-group-append">
@@ -45,17 +36,7 @@ if($_SESSION['type'] == 'investigator'){
                             <i class="fa fa-search"></i>
                         </button>
                     </span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <select id="statusFilter" class="form-control py-2 border-right-0 border" id="exampleFormControlSelect1">
-                         <option value="all" name="status">All</option>
-                         <option value="under_investigation" name="status">Under Investigation</option>
-                         <option value="cleared" name="status">Cleared</option>
-                         <option value="solved" name="status">Solved</option>
                     </select>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a class='btn btn-primary' href= 'casecompleteArchive.php' style="color:white;text-decoration:none">Case Archives</a>
-                <!-- go to case archives meaning "complete" -> casecompleteArchive.php -->
-                
                 </div>
             </div>  
         </div>
@@ -75,21 +56,21 @@ if($_SESSION['type'] == 'investigator'){
                         <th> Date Completed </th>
                         <th> Action </th>
                     </thead>
-                    <tbody id="table_id" class="display">
+                    <tbody id="table-body">
                         <?php
                         $sql = "SELECT * FROM adminview left join 
+                        (
+                            SELECT  remark, remarks.adminview_id, CONCAT(fnameUser, ' ',lnameUser) as name
+                            from remarks right join
                             (
-                                SELECT  remark, remarks.adminview_id, CONCAT(fnameUser, ' ',lnameUser) as name
-                                from remarks right join
-                                (
-                                    SELECT max(created_at) as maxDate, adminview_id from remarks group by adminview_id
-                                )
-                                as remarks2 on remarks2.adminview_id = remarks.adminview_id
-                                join users on remarks.userID = users.idUsers where remarks2.maxDate = remarks.created_at
+                                SELECT max(created_at) as maxDate, adminview_id from remarks group by adminview_id
                             )
-                         as remarks on adminview_id = benNum";
-                        $result = $conn->query($sql);
-                        while($row = $result->fetch_array())
+                            as remarks2 on remarks2.adminview_id = remarks.adminview_id
+                            join users on remarks.userID = users.idUsers where remarks2.maxDate = remarks.created_at
+                        )
+                        as remarks on adminview_id = benNum where compStatus = 'solved' ";
+                        $select_case = mysqli_query($conn, $sql);
+                        while($row = mysqli_fetch_assoc($select_case))
                         {
                             $benNum = $row['benNum'];
                             $compOffense = $row['compOffense'];
@@ -118,18 +99,15 @@ if($_SESSION['type'] == 'investigator'){
                             
                             echo "<td> $compInv </td>";
                             echo "<td> $compRemarks </td>";
-                            echo "<td>$name</td>";
+                            echo "<td> $name </td>";
                             echo "<td> $dateCompl </td>";
-                            echo "<td>&nbsp;<a href='caseDetails.php?id=$benNum' class='text-success'>View Details</a></td>";
+                            echo "<td><a href='caseDetails.php?id=$benNum' class='text-success'>View Details</a></td>";
                             echo "</tr>";
                         }
                         ?>
                     </tbody>
                 </table>
-                <button  type="button" name="printReport" class="btn btn-primary" formation="/homeitrack.php">
-                            <a href= 'printreport.php' style="color:white;text-decoration:none">Generate Report</a>
-                <!-- nagerror kapag nililink namin sa "printreport.php"-->
-                </button>
+                <a class='btn btn-primary' href= 'homeitrack.php' style="color:white;text-decoration:none">Back</a>
                 <br>
                 <br>
             </div>
@@ -175,7 +153,7 @@ if($_SESSION['type'] == 'investigator'){
                     tr.append('<td>'+v.dateCompl+'</td>');
                 }
                 tr.append('<td><a href="caseDetails.php?id='+v.benNum+'" class="text-success">View Details</a></td>');
-                $('#table_id').append(tr);
+                $('#table-body').append(tr);
 
                 //<a href='editRemarks.php?id=$benNum'>Edit Remarks</a> &nbsp;|&nbsp;<a href='caseDetails.php' class='text-success'>View Details</a>
             }
@@ -185,25 +163,20 @@ if($_SESSION['type'] == 'investigator'){
                 let filter = $('#statusFilter').val();
                 $.ajax({
                     type: "POST",
-                    url: "ajax/homeitrack.search.php",
+                    url: "ajax/casecompleteArchive.search.php",
                     dataType: 'json',
                     data: {
                         search : keyword,
-                        filter : filter
                     },
                     success: function(response){
                         console.log(response);  
-                        $('#table_id').html('');
+                        $('#table-body').html('');
                         $.each(response, populateTable);
                     },
                 });
             }
             $('#search').change(fetchData);
-            $('#statusFilter').change(fetchData);;
         })
-        $(document).ready( function () {
-        $('#table_id').DataTable();
-        } );
     </script>
 </body>
 

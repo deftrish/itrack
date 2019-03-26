@@ -3,8 +3,13 @@
     if(!isset($_SESSION['userId'])){
         header('Location: index.php');
     }
+    $id = $_SESSION['userId'];
     include 'includes/dbh.inc.php';
-    $sql = "SELECT * from incident_mgmt join users on incidentInv = idUsers where is_closed = 0";
+    if($_SESSION['type'] == 'itms'){
+        $sql = "SELECT * from incident_mgmt join users on incidentInv = idUsers where is_closed = 0";
+    }else{
+        $sql = "SELECT * from incident_mgmt join users on incidentInv = idUsers where is_closed = 0 and idUsers = $id";
+    }
     $result = $conn->query($sql);
 	require "adminheader.php"; 
     
@@ -46,7 +51,7 @@
 
         <div class="row">
             <div class="container">            
-                <table class="table table-striped">
+                <table class="table table-striped" valign="middle">
                 <thead>
                     <th>Incident Ticket Number</th>
                     <th>Incident</th>
@@ -76,7 +81,11 @@
                             echo "<td>$userName</td>";
                             //hindi pa din po nakikita kung sino yung nagsubmit
                             echo "<td>$report</td>";
-                            echo "<td><a href='itmsview_incidentmgmt.php?id=$id'>Edit Details</a></td>";
+                            if($_SESSION['type'] == 'itms'){
+                                echo "<td><a class='btn btn-success btn-sm' href='itmsview_incidentmgmt.php?id=$id'>Edit Details</a></td>";
+                            }else{
+                                echo "<td><a class='btn btn-success btn-sm' href='userview_incidentMgmt.php?id=$id'>Edit Details</a></td>";
+                            }
                             echo '</tr>';
                         }
                     } ?>
@@ -109,7 +118,11 @@
                             }else{
                                 tr.append('<td>'+v.dateCompl+'</td>');
                             }
-                            tr.append('<td><a href="itmsview_incidentmgmt.php?id=$id'+ v.incidentTicket+'">Edit Details</a></td>');
+                            <?php if($_SESSION['type'] == 'itms'){ ?>
+                                tr.append('<td><a class="btn btn-success btn-sm" href="itmsview_incidentmgmt.php?id='+ v.incidentTicket+'">Edit Details</a></td>');
+                            <?php }else{ ?>
+                                tr.append('<td><a class="btn-success btn-sm" href="userview_incidentMgmt.php?id='+ v.incidentTicket+'">Edit Details</a></td>');
+                            <?php } ?>
                             $('#table-body').append(tr);
                         });
                         

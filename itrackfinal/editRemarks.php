@@ -3,15 +3,22 @@
     
     include 'includes/admin.inc.php';
     require "adminheader.php";
-    
-    
+    if(!isset($_SESSION['userId'])){
+        header('Location: index.php');
+    }
+    $userId = $_SESSION['userId'];
     if (isset($_POST['case-submit'])) {
         $compRemarks = $_POST['compRemarks'];
         $id = $_POST['benNum'];
-
+        $date = date('Y-m-d H:i:s');
        // $compCompl = $_POST['compCompl'];
 
-        $sql = "UPDATE adminview SET compRemarks ='$compRemarks' where benNum = $id";
+        $sql = "INSERT INTO remarks (remark, adminview_id, userID, created_at) VALUES ('$compRemarks', $id, $userId, '$date')";
+        if (!$conn->query($sql)){
+            $error = "Something went wrong";
+        }
+        $remarksId = $conn->insert_id;
+        $sql = "UPDATE adminview SET remark_id ='$remarksId' where benNum = $id";
         if (!$conn->query($sql)){
             $error = "Something went wrong";
         }else{
@@ -67,6 +74,8 @@
                          <td> <?=$result['compStatus']?></td>
                         </tr>
                         <tr>
+                            <td> Current Remark</td>
+                            <td> <?=$result['compRemarks']?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -77,7 +86,7 @@
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <div class=form-group>
                     <label for="compRemarks">Remarks</label>
-                    <input class="form-control" type="text" name="compRemarks" value="<?=$result['compRemarks']?>" placeholder="Remarks">
+                    <input class="form-control" type="text" name="compRemarks" value="" placeholder="Remarks">
                     <input type="hidden" name="benNum" value="<?=$id ?>"
                 </div>
                     <!-- <input type="password" name="compCompl" placeholder="Date Completed"> -->

@@ -81,8 +81,7 @@ if(!isset($_SESSION['userId'])){
 					 <b>Incident Report</b>	
 					 <div class="row">
   					 <div class="col-lg-4">
-					<textarea class="scrollabletextbox" name="report"  rows="4.5" cols="130">
-					</textarea>
+					<textarea class="scrollabletextbox" name="report"  rows="4.5" cols="130"></textarea>
 					</div>
                     <br>
  					<div class="col-lg-9">

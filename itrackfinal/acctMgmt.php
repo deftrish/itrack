@@ -88,10 +88,9 @@
                             echo "<tr>";
                             echo "<td>$name</td>";
                             echo "<td>$userType</td>";
-                            echo "<td><a href='editAdminAccount.php?id=$id'>Edit Account</a>|<a href='includes/deleteAccount.inc.php?id=$id' class='text-danger'>Delete</a></td>";
+                            echo "<td><a class='btn btn-primary btn-sm' href='editAdminAccount.php?id=$id'>Edit Account</a>     <a href='includes/deleteAccount.inc.php?id=$id' class='btn btn-danger btn-sm'>Delete</a></td>";
                             echo "</tr>";
                         }
-
                     ?>
                     <tr>
 

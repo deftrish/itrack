@@ -8,6 +8,10 @@ require "logintemplate.php";
       <?php
       if(isset($_SESSION['userId'])) {
         if($_SESSION['isAdmin']){
+          if($_SESSION['type'] == 'investigator'){
+            header("Location: dutyHome.php");          
+            exit();
+          }
           header("Location: homeitrack.php");
         }
         else{
