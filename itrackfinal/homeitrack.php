@@ -10,6 +10,10 @@ if($_SESSION['type'] == 'investigator'){
     header("Location: dutyHome.php");          
     exit();
 }
+$perPage = 6;
+$page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
+$startAt = $perPage * ($page - 1);
+
     require "adminheader.php";
 ?>
 <?php
@@ -77,6 +81,22 @@ if($_SESSION['type'] == 'investigator'){
                     </thead>
                     <tbody id="table_id" class="display">
                         <?php
+                        $sql = "SELECT count(*) as total FROM adminview left join 
+                        (
+                            SELECT  remark, remarks.adminview_id, CONCAT(fnameUser, ' ',lnameUser) as name
+                            from remarks right join
+                            (
+                                SELECT max(created_at) as maxDate, adminview_id from remarks group by adminview_id
+                            )
+                            as remarks2 on remarks2.adminview_id = remarks.adminview_id
+                            join users on remarks.userID = users.idUsers where remarks2.maxDate = remarks.created_at
+                        )
+                        as remarks on adminview_id = benNum";
+
+                        $result = $conn->query($sql);
+                        $row = $result->fetch_array();
+                        $totalPages = ceil($row['total'] / $perPage);
+
                         $sql = "SELECT * FROM adminview left join 
                             (
                                 SELECT  remark, remarks.adminview_id, CONCAT(fnameUser, ' ',lnameUser) as name
@@ -87,7 +107,7 @@ if($_SESSION['type'] == 'investigator'){
                                 as remarks2 on remarks2.adminview_id = remarks.adminview_id
                                 join users on remarks.userID = users.idUsers where remarks2.maxDate = remarks.created_at
                             )
-                         as remarks on adminview_id = benNum";
+                         as remarks on adminview_id = benNum limit $startAt, $perPage";
                         $result = $conn->query($sql);
                         while($row = $result->fetch_array())
                         {
@@ -126,12 +146,46 @@ if($_SESSION['type'] == 'investigator'){
                         ?>
                     </tbody>
                 </table>
-                <button  type="button" name="printReport" class="btn btn-primary" formation="/homeitrack.php">
-                            <a href= 'printreport.php' style="color:white;text-decoration:none">Generate Report</a>
-                <!-- nagerror kapag nililink namin sa "printreport.php"-->
-                </button>
                 <br>
                 <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 offset-sm-4">
+                <div class="center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <?php
+                                if($page>1){
+                            ?>
+                            <li class="page-item">
+                            <a class="page-link" href="homeitrack.php?page=<?=$page-1?>" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            </li>
+                                <li class="page-item"><a class="page-link" href="homeitrack.php?page=<?=$page-1?>"><?=$page-1?></a></li>
+                            <?php
+                                }
+                            ?>
+                            <li class="page-item active"><a class="page-link" href="homeitrack.php?page=<?=$page?>"><?=$page?></a></li>
+                            <?php
+                                if($page<$totalPages && $totalPages>1){
+                            ?>
+                                <li class="page-item"><a class="page-link" href="homeitrack.php?page=<?=$page+1?>"><?=$page+1?></a></li>
+
+                            <li class="page-item">
+                            <a class="page-link" href="homeitrack.php?page=<?=$page+1?>" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                            </li>
+                            <?php
+                                }
+                            ?>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>

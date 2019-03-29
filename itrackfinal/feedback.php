@@ -48,7 +48,7 @@
             <div class="row">
             <div class="col-md-4">
                 <div class="input-group">
-                    <input id="search" class="form-control py-2 border-right-0 border" type="text" placeholder="Search Blotter Entry Number/Comment" >
+                    <input id="search" class="form-control py-2 border-right-0 border" type="text" placeholder="Search Comment" >
                     <span class="input-group-append">
                         <button class="btn btn-outline-secondary border-left-0 border" type="button">
                             <i class="fa fa-search"></i>
@@ -72,7 +72,6 @@
                 <table id="myTable">
                 <table class="table table-striped">
                     <thead>
-                        <th>Blotter Entry Number</th>
                         <th>Comments or Suggestions</th>
                         <th>Date</th>
                 
@@ -80,7 +79,6 @@
                     <tbody id="table-body">
                     <?php while($row = mysqli_fetch_array($result)):?>
                 <tr>
-                    <td><?php echo $row['benNum'];?></td>
                     <td><?php echo $row['feed_comments'];?></td>
                     <td><?php echo $row['dateAns'];?></td>
                  
