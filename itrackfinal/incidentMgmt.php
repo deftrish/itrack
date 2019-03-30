@@ -3,12 +3,27 @@
     if(!isset($_SESSION['userId'])){
         header('Location: index.php');
     }
-    $id = $_SESSION['userId'];
     include 'includes/dbh.inc.php';
+    $id = $_SESSION['userId'];
+
+    $perPage = 6;
+    $page = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
+    $startAt = $perPage * ($page - 1);
+
     if($_SESSION['type'] == 'itms'){
-        $sql = "SELECT * from incident_mgmt join users on incidentInv = idUsers where is_closed = 0";
+        $sql = "SELECT count(*) as total from incident_mgmt join users on incidentInv = idUsers where is_closed = 0";
     }else{
-        $sql = "SELECT * from incident_mgmt join users on incidentInv = idUsers where is_closed = 0 and idUsers = $id";
+        $sql = "SELECT count(*) as total from incident_mgmt join users on incidentInv = idUsers where is_closed = 0 and idUsers = $id";
+    }
+    
+    $result = $conn->query($sql);
+    $row = $result->fetch_array();
+    $totalPages = ceil($row['total'] / $perPage);
+
+    if($_SESSION['type'] == 'itms'){
+        $sql = "SELECT * from incident_mgmt join users on incidentInv = idUsers where is_closed = 0 limit $startAt, $perPage";
+    }else{
+        $sql = "SELECT * from incident_mgmt join users on incidentInv = idUsers where is_closed = 0 and idUsers = $id limit $startAt, $perPage";
     }
     $result = $conn->query($sql);
 	require "adminheader.php"; 
@@ -131,5 +146,45 @@
             });
         })
         </script>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 offset-sm-4">
+                <div class="center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <?php
+                                if($page>1){
+                            ?>
+                            <li class="page-item">
+                            <a class="page-link" href="incidentMgmt.php?page=<?=$page-1?>" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            </li>
+                                <li class="page-item"><a class="page-link" href="incidentMgmt.php?page=<?=$page-1?>"><?=$page-1?></a></li>
+                            <?php
+                                }
+                            ?>
+                            <li class="page-item active"><a class="page-link" href="incidentMgmt.php?page=<?=$page?>"><?=$page?></a></li>
+                            <?php
+                                if($page<$totalPages && $totalPages>1){
+                            ?>
+                                <li class="page-item"><a class="page-link" href="incidentMgmt.php?page=<?=$page+1?>"><?=$page+1?></a></li>
+
+                            <li class="page-item">
+                            <a class="page-link" href="incidentMgmt.php?page=<?=$page+1?>" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                            </li>
+                            <?php
+                                }
+                            ?>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
 </body>
 </html>

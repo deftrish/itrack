@@ -25,7 +25,7 @@ require "logintemplate.php";
         <br>
         <br>
         
-                   <p style="text-align:center;"><img src="/assets/img/itrack.png" width="280" 
+                   <p style="text-align:center;"><img src="assets/img/itrack.png" width="280" 
          height="100"></p> 
                    
                 
