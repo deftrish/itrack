@@ -1,0 +1,139 @@
+TO DO LIST
+
+WORK HUSTLE 
+2. Filters 
+      - "userview_incidenthomepage" (Hindi pa to magagawa kasi hindi pa nakafetch yung data for it)
+      - "print report.php"
+3. dashboards
+4. Incident Management
+      User/Kung sino yung nagsubmit POV
+      a. Pagkapasok niya sa incident management makikita niya lang sa table is kung anong sinubmit niya
+      which is the " userview_incidenthomepage.php "
+      b. pag click ng edit details "userview_incidentMgmt.php" 
+            - pag na-close na ni ITMS yung finile niya dun niya lang pwede "ire-open" yung case
+      c. Incident History button -> makikita niya lang dun yung mga sinubmit niya na case na close na
+
+5. Generate reports "homeitrack.php" (IF POSSIBLE)
+ a. Added: Print Report Button 
+   - Click -> "printreport.php"
+   - filter niya kung ano gusto niya makitang reports then once na okay na 
+   - click print button then dapat mag coconvert na siya into pdf
+
+
+
+access:
+
+COMPLAINANT
+username: Chacha
+password: paucha
+
+ADMIN
+username: admin 
+password: try123
+
+DASHBOARD INFO DATA SHIT
+1. How many cases in UNDER INVESTI, CLEARED, SOLVED ranging from (WEEKLY MONTHLY AND YEARLY BASIS)  
+- Line chart for each status
+4. ratings of survey per category(ilan nagsabi mahusay etcccc, ilan nagsabi need progress) -
+- BAR CHART HORIZONTAL for each questions
+
+
+Screen Cap the Following in the system (trish will do the screen cap kaya need makita working features of the ff):
+Log in page flow for Complainant side
+1.	iTrack Homepage login for complainant
+2.	iTrack Sign up page for complainant
+Feedback &Viewing of filed cases for complainant
+1.	iTrack Feedback Page for Complainant
+2.	iTrack Feedback comments & suggestion tab
+3.	iTrack Viewing of filed cases for complainant
+4.	iTrack viewing of remarks for requirements
+Log in page flow for Admin side
+1.	iTrack Log in page for admin side
+2.	iTrack Viewing of complaints admin side
+3.	iTrack search and sort function for filed cases admin side
+Viewing of Feedback Results for admin side
+1.	iTrack Home Page Feedback button
+2.	iTrack Feedback Home Page
+Viewing of Dashboard for admin side
+1.	iTrack Home Page Dashboard button
+2.	iTrack Dashboard Home Page
+Incident Management Log admin side (PNP USERS)
+	
+Incident Management log admin side (Department Users)
+
+User	Privileges
+Admin	
+1. Creating an account 
+-	Add new account
+-	Delete old account
+-	Edit information in the account
+2. Log in
+-	Logging in using the username and password for admin (DONE\)
+3. Change password
+-	After logging in using the default password, the admin can change his/her password.
+4. View dashboards
+- The admin can view the dashboard that is generated from feedback.
+- Download report from dashboard
+- Print report from dashboard
+7. Monitor complaints from iTrack
+-	Check the status of the complaint if it’s “solve” or still “Under Investigation”, “Solved”, “Cleared”. (DONE)
+8. Write in the Incident Log
+     -      Can create an incident report if a problem occurred within    
+            the system.
+9. Log out
+-	After the admin log-out, he/she will be redirected to the Login page.
+
+
+Duty Investigator	
+1. Log in
+-	 Logging in using the username and password for Duty Investigator.
+2. Add Remarks
+-	Duty investigator can add new remarks in the complaints. (DONE PERO NAPUPUNTA SA IBANG COLUMN)
+3. Monitor the complaints 
+4. Write in the Incident Log
+     -      Can create an incident report if a problem occurred within    
+            the system.
+5. Log out
+-	After the duty investigator log-out, he/she will be redirected to the Login page.
+
+
+Desk Officer	
+1. Log in
+-	Logging in using the username and password for Duty Investigator.
+2. View the complaints
+-	The desk officer can view the status of the complaints in case there are complainants that are still going to the precinct.
+3. Log out
+-	After the desk officer log out, he/she will be redirected to the Login page.
+
+
+Complainant	
+1. Sign up
+     -     The Complainant can sign up in the website to access the      
+           system with the access code
+2. Log in
+-	The complainant can log in to view the status of the case
+3. Feedback
+      -     The complainant is required to provide a feedback to view    
+            the status of filed case.
+4. Monitor the case
+-	Can view the status of the case if it’s “Under Investigation”, “Solved”, “Cleared”.
+5. View the requirements
+-	The complainant can view the requirements that is needed for the case through remarks.
+6. Log Out
+-	After logging out, the complainant will be redirect to the homepage of iTrack.
+
+
+Admin (ITMS)	
+1. Manage Database
+-	Edit Database
+-	Restore Database
+-	Backup Database
+-	Delete Database
+2. Maintenance of the system
+-	Updating the system
+-	Fixing bugs and errors of the system
+3. Monitor and Maintain the Incident Management Log
+-	Reviewing incident
+-	Categorizing each incident
+-	Solving each incident
+
